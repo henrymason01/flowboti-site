@@ -24,15 +24,16 @@ body{
 .container{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
 .center{text-align:center}
 
+/* Minimal header */
 .nav{position:sticky;top:0;z-index:50;background:rgba(11,13,19,.6);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:64px}
+.nav-min .nav-inner{display:flex;align-items:center;justify-content:flex-start;min-height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700}
-.logo{width:16px;height:16px;border-radius:4px;background:conic-gradient(from 160deg,#5f8cff,#7aa2ff,#9bb6ff,#5f8cff)}
+.brand-logo{height:28px;width:auto;display:block}
 .brand-name{letter-spacing:.2px}
-.nav-links a{color:var(--ink);text-decoration:none;margin-left:18px;font-weight:600;opacity:.9}
-.nav-links a:hover{opacity:1}
-.hamburger{display:none;background:transparent;border:0;cursor:pointer}
-.hamburger span{display:block;width:22px;height:2px;background:#c7cfef;margin:5px 0;border-radius:1px}
+
+/* Hide any old nav links if they exist */
+.nav-links,.hamburger,.mobile-menu{display:none !important}
+
 
 .mobile-menu{display:flex;flex-direction:column;padding:10px 20px;background:rgba(16,19,26,.98);border-bottom:1px solid var(--border)}
 .mobile-menu a{padding:10px 0;text-decoration:none;color:var(--ink);border-top:1px solid var(--border)}
