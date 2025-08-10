@@ -10,14 +10,14 @@
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="stylesheet" href="/styles.css" />
   <meta property="og:title" content="FlowBotAI — Modern AI Chatbots for SMBs" />
-  <meta property="og:description" content="Automate conversations, capture leads, and book clients 24/7. See the demo." />
+  <meta property="og:description" content="Automate conversations, capture details, and bookings 24/7. See the demo." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/logo.png" />
   <meta property="og:url" content="https://flowboti-site.vercel.app/" />
   <meta name="theme-color" content="#0b0d13" />
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header: centered bigger logo -->
   <header class="nav nav-center" role="banner">
     <div class="container nav-inner-center">
       <a class="brand-center" href="/" aria-label="FlowBotAI Home">
@@ -48,15 +48,13 @@
       </div>
     </section>
 
-    <!-- DEMO -->
+    <!-- DEMO (near top) -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">Live demo</h2>
-        <p class="center muted">Try the chatbot below. This is what your visitors will see on your site.</p>
+        <p class="center muted">Your chatbot will appear here when you’re ready to embed it.</p>
         <div class="demo-wrap">
-          <div class="demo-placeholder">
-            <p>Demo coming soon. Your chatbot will appear here.</p>
-          </div>
+          <div class="demo-placeholder"><p>Demo coming soon.</p></div>
         </div>
       </div>
     </section>
@@ -66,30 +64,12 @@
       <div class="container">
         <h2 class="center">What you can get</h2>
         <div class="grid-3">
-          <article class="tile">
-            <h3>24/7 answers</h3>
-            <p>Instant replies to FAQs so you never miss enquiries at night or weekends.</p>
-          </article>
-          <article class="tile">
-            <h3>Lead capture</h3>
-            <p>Collect name, email, phone, and intent. Send to email or Google Sheets.</p>
-          </article>
-          <article class="tile">
-            <h3>Bookings</h3>
-            <p>Connect your Calendly or booking system so the bot can schedule for you.</p>
-          </article>
-          <article class="tile">
-            <h3>Handover to human</h3>
-            <p>Route complex chats to a staff inbox or live agent when needed.</p>
-          </article>
-          <article class="tile">
-            <h3>Product recommendations</h3>
-            <p>Guide users to the right service or product with simple questions.</p>
-          </article>
-          <article class="tile">
-            <h3>Analytics</h3>
-            <p>Track conversations, common questions, and lead sources.</p>
-          </article>
+          <article class="tile"><h3>24/7 answers</h3><p>Instant replies to FAQs so you never miss enquiries at night or weekends.</p></article>
+          <article class="tile"><h3>Lead capture</h3><p>Collect name, email, phone, and intent. Send to email or Google Sheets.</p></article>
+          <article class="tile"><h3>Bookings</h3><p>Connect Calendly or your booking system so the bot can schedule for you.</p></article>
+          <article class="tile"><h3>Handover to human</h3><p>Route complex chats to a staff inbox or live agent when needed.</p></article>
+          <article class="tile"><h3>Product recommendations</h3><p>Guide users to the right service or product with simple questions.</p></article>
+          <article class="tile"><h3>Analytics</h3><p>Track conversations, top questions, and lead sources.</p></article>
         </div>
       </div>
     </section>
@@ -98,49 +78,4 @@
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center">Contact us</h2>
-
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-          <!-- Honeypot anti-spam -->
-          <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave this field empty">
-
-          <label class="field">
-            <span class="label">Full Name</span>
-            <input type="text" name="full_name" required autocomplete="name" />
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">Business Website</span>
-            <input type="url" name="website" placeholder="https://example.com" required />
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">Email</span>
-            <input type="email" name="_replyto" required autocomplete="email" />
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">What should the bot do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe the main tasks or questions the bot should handle."></textarea>
-            <span class="error"></span>
-          </label>
-
-          <button type="submit" class="btn btn-full">Send</button>
-          <p class="fineprint center">Or email <a href="mailto:hello@flowbotai.com">hello@flowbotai.com</a></p>
-          <p id="form-status" class="status"></p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> FlowBotAI</span>
-    </div>
-  </footer>
-
-  <script src="/script.js" defer></script>
-</body>
-</html>
+        <!-- Replace YOUR_FORM_ID aft
