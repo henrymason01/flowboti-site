@@ -162,3 +162,17 @@ body{
   .brand-logo{height:64px}
   .demo-placeholder{min-height:300px}
 }
+.contact-email {
+  font-size: clamp(28px, 3.5vw, 42px); /* large text */
+  font-weight: 900;
+  margin-top: 26px;
+}
+
+.contact-email a {
+  color: #ffffff; /* pure white */
+  text-decoration: none;
+}
+
+.contact-email a:hover {
+  text-decoration: underline;
+}
