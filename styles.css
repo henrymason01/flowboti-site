@@ -113,3 +113,11 @@ body{
   .hamburger{display:block;margin-right:6px}
   .grid-3,.steps{grid-template-columns:1fr}
 }
+/* Minimal header */
+.nav{position:sticky;top:0;z-index:60;background:rgba(11,13,19,.6);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border)}
+.nav-min .nav-inner{display:flex;align-items:center;justify-content:flex-start;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700}
+.brand-logo{height:28px;width:auto;display:block}
+.brand-name{letter-spacing:.2px}
+/* Hide any old nav UI if it exists */
+.nav-links,.hamburger,.mobile-menu{display:none !important}
