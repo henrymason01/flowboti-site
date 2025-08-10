@@ -78,4 +78,44 @@
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center">Contact us</h2>
-        <!-- Replace YOUR_FORM_ID aft
+        <!-- Replace YOUR_FORM_ID after creating a Formspree form -->
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave this field empty">
+          <label class="field">
+            <span class="label">Full Name</span>
+            <input type="text" name="full_name" required autocomplete="name" />
+            <span class="error"></span>
+          </label>
+          <label class="field">
+            <span class="label">Business Website</span>
+            <input type="url" name="website" placeholder="https://example.com" required />
+            <span class="error"></span>
+          </label>
+          <label class="field">
+            <span class="label">Email</span>
+            <input type="email" name="_replyto" required autocomplete="email" />
+            <span class="error"></span>
+          </label>
+          <label class="field">
+            <span class="label">What should the bot do?</span>
+            <textarea name="requirements" rows="6" required placeholder="Describe the main tasks or questions the bot should handle."></textarea>
+            <span class="error"></span>
+          </label>
+          <button type="submit" class="btn btn-full">Send</button>
+          <p class="fineprint center">Or email <a href="mailto:hello@flowbotai.com">hello@flowbotai.com</a></p>
+          <p id="form-status" class="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> FlowBotAI</span>
+    </div>
+  </footer>
+
+  <!-- IMPORTANT: the only script reference -->
+  <script src="/script.js" defer></script>
+</body>
+</html>
