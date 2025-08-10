@@ -31,7 +31,7 @@ body{
 .nav{position:sticky;top:0;z-index:60;background:rgba(11,13,19,.6);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--border)}
 .nav-inner-center{display:flex;align-items:center;justify-content:center;min-height:68px}
 .brand-center{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
-.brand-logo{height:32px;width:auto;display:block}
+.brand-logo{height:60px;width:auto;display:block}
 
 /* Hero */
 .hero{padding:70px 0 40px}
