@@ -1,76 +1,126 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FlowBotAI — Modern AI Chatbots for SMBs</title>
-  <meta name="description" content="FlowBotAI builds modern AI chatbots that answer FAQs, capture leads, and book appointments 24/7. See a live demo and contact us." />
-  <link rel="icon" href="/logo.png" type="image/png" />
-  <link rel="apple-touch-icon" href="/logo.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <link rel="stylesheet" href="/styles.css" />
-  <meta property="og:title" content="FlowBotAI — Modern AI Chatbots for SMBs" />
-  <meta property="og:description" content="Automate conversations, capture details, and bookings 24/7. See the demo." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/logo.png" />
-  <meta property="og:url" content="https://flowboti-site.vercel.app/" />
-  <meta name="theme-color" content="#0b0d13" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>FlowBotAI — Your Dedicated Automated Assistant</title>
+  <meta name="description" content="Delight clients with a personal, branded automated assistant that works 24/7. Elegant, trusted, effortless. See the demo and contact us."/>
+  <link rel="icon" href="/logo.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="/logo.png"/>
+  <link rel="stylesheet" href="/styles.css"/>
+  <meta name="theme-color" content="#0b0d13"/>
 </head>
 <body>
-  <!-- Header: centered bigger logo -->
+  <!-- Header -->
   <header class="nav">
-  <div class="nav-inner-center">
-    <a class="brand-center" href="/">
-      <img src="/logo.png" alt="FlowBotAI logo" class="brand-logo">
-      <span class="brand-name">FlowBotAI</span>
-    </a>
-  </div>
-</header>
+    <div class="container nav-inner-center">
+      <a class="brand-center" href="/">
+        <img src="/logo.png" alt="FlowBotAI logo" class="brand-logo"/>
+        <span class="brand-name">FlowBotAI</span>
+      </a>
+    </div>
+  </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-inner single">
-        <div class="hero-copy center">
-          <h1>Automate conversations. Win more customers.</h1>
+    <!-- HERO with optional background video -->
+    <section class="hero hero-video" aria-label="Intro">
+      <!-- Optional: upload /hero.mp4 (muted, 10–15s) and /hero-poster.jpg -->
+      <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="/hero-poster.jpg">
+        <source src="/hero.mp4" type="video/mp4"/>
+      </video>
+
+      <div class="container hero-inner">
+        <div class="hero-copy" data-anim="fade-up">
+          <h1>Your dedicated Automated Assistant, without the overhead.</h1>
           <p class="sub">
-            AI chatbots that answer questions, capture details, and take bookings all day and night.
-            Managed for you.
+            Delight clients with a personal, branded assistant that works 24/7 — designed for trust, not tech.
           </p>
-          <div class="cta-row center">
-            <a href="#demo" class="btn">See live demo</a>
+          <div class="cta-row">
+            <a href="#demo" class="btn">See it in action</a>
             <a href="#contact" class="link">Contact us</a>
           </div>
-          <ul class="ticks center-ul">
-            <li>Works on any website</li>
-            <li>Fast launch</li>
-          </ul>
         </div>
+
+        <ul class="hero-ticks" data-anim="stagger-up">
+          <li>Clients served, not queued</li>
+          <li>Always on-brand responses</li>
+          <li>Focus on growth; we handle the conversation</li>
+        </ul>
       </div>
+
+      <button class="scroll-cue" aria-label="Scroll to demo" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">
+        <span></span>
+      </button>
     </section>
 
-    <!-- DEMO (near top) -->
+    <!-- DEMO near top -->
     <section id="demo" class="section alt">
       <div class="container">
-        <h2 class="center">Live demo</h2>
-        <p class="center muted">Your chatbot will appear here when you’re ready to embed it.</p>
-        <div class="demo-wrap">
-          <div class="demo-placeholder"><p>Demo coming soon.</p></div>
+        <h2 class="center" data-anim="fade-up">See your future Automated Assistant in action</h2>
+        <p class="center muted" data-anim="fade-up" data-delay="80">
+          Experience an assistant that understands your brand voice and works silently behind the scenes.
+        </p>
+        <div class="demo-wrap" data-anim="fade-up" data-delay="120">
+          <!-- Replace placeholder with your embed when ready -->
+          <div class="demo-placeholder">
+            <p>Demo coming soon. Your assistant will appear here.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section id="features" class="section">
+    <!-- VALUE / OUTCOMES -->
+    <section class="section">
       <div class="container">
-        <h2 class="center">What you can get</h2>
+        <h2 class="center" data-anim="fade-up">Designed for real business outcomes</h2>
         <div class="grid-3">
-          <article class="tile"><h3>24/7 answers</h3><p>Instant replies to FAQs so you never miss enquiries at night or weekends.</p></article>
-          <article class="tile"><h3>Lead capture</h3><p>Collect name, email, phone, and intent. Send to email or Google Sheets.</p></article>
-          <article class="tile"><h3>Bookings</h3><p>Connect Calendly or your booking system so the bot can schedule for you.</p></article>
-          <article class="tile"><h3>Handover to human</h3><p>Route complex chats to a staff inbox or live agent when needed.</p></article>
-          <article class="tile"><h3>Product recommendations</h3><p>Guide users to the right service or product with simple questions.</p></article>
-          <article class="tile"><h3>Analytics</h3><p>Track conversations, top questions, and lead sources.</p></article>
+          <article class="tile" data-anim="slide-up">
+            <h3>Elegant First Impressions</h3>
+            <p>Your assistant presents your value with clarity and confidence — every time.</p>
+          </article>
+          <article class="tile" data-anim="slide-up" data-delay="60">
+            <h3>Operational Peace of Mind</h3>
+            <p>Automated, yet personal — consistent client engagement on autopilot.</p>
+          </article>
+          <article class="tile" data-anim="slide-up" data-delay="120">
+            <h3>Scalable Excellence</h3>
+            <p>Grow without adding headcount; bookings, handoff, and lead capture built-in.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPATIBILITY / SOCIAL PROOF -->
+    <section class="section alt">
+      <div class="container logos" data-anim="fade-up">
+        <div class="logos-row">
+          <span class="logo-badge">Professional Services</span>
+          <span class="logo-badge">Wealth / Real Estate</span>
+          <span class="logo-badge">Healthcare</span>
+          <span class="logo-badge">E-commerce</span>
+          <span class="logo-badge">Hospitality</span>
+        </div>
+        <p class="muted center small">Works with your stack — Calendly, HubSpot, Google Sheets & more.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <h2 class="center" data-anim="fade-up">FAQ</h2>
+        <div class="faq" data-anim="fade-up" data-delay="60">
+          <details>
+            <summary>Do we need to rebuild our website?</summary>
+            <p>No — you paste a short embed. We handle setup and maintenance.</p>
+          </details>
+          <details>
+            <summary>How quickly can we launch?</summary>
+            <p>Most assistants go live within a few days of receiving your content and goals.</p>
+          </details>
+          <details>
+            <summary>Can it respect compliance or approvals?</summary>
+            <p>Yes. We can restrict topics, add internal review, and log interactions.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -78,30 +128,36 @@
     <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
-        <h2 class="center">Contact us</h2>
-        <!-- Replace YOUR_FORM_ID after creating a Formspree form -->
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate>
-          <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave this field empty">
+        <h2 class="center" data-anim="fade-up">Contact us</h2>
+
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="60">
+          <!-- Honeypot -->
+          <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
+
           <label class="field">
             <span class="label">Full Name</span>
-            <input type="text" name="full_name" required autocomplete="name" />
+            <input type="text" name="full_name" required autocomplete="name"/>
             <span class="error"></span>
           </label>
+
           <label class="field">
             <span class="label">Business Website</span>
-            <input type="url" name="website" placeholder="https://example.com" required />
+            <input type="url" name="website" placeholder="https://example.com" required/>
             <span class="error"></span>
           </label>
+
           <label class="field">
             <span class="label">Email</span>
-            <input type="email" name="_replyto" required autocomplete="email" />
+            <input type="email" name="_replyto" required autocomplete="email"/>
             <span class="error"></span>
           </label>
+
           <label class="field">
-            <span class="label">What should the bot do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe the main tasks or questions the bot should handle."></textarea>
+            <span class="label">What should the assistant do?</span>
+            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, handoffs, tools to connect (e.g., Calendly/CRM)."></textarea>
             <span class="error"></span>
           </label>
+
           <button type="submit" class="btn btn-full">Send</button>
           <p class="contact-email center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
           <p id="form-status" class="status"></p>
@@ -110,13 +166,12 @@
     </section>
   </main>
 
-  <footer class="footer" role="contentinfo">
+  <footer class="footer">
     <div class="container footer-inner">
       <span>© <span id="year"></span> FlowBotAI</span>
     </div>
   </footer>
 
-  <!-- IMPORTANT: the only script reference -->
   <script src="/script.js" defer></script>
 </body>
 </html>
