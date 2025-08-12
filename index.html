@@ -22,9 +22,8 @@
   </header>
 
   <main id="main">
-    <!-- HERO (centered, taller, less top padding) -->
+    <!-- HERO (tighter top, more space before CTAs) -->
     <section class="hero hero-video" aria-label="Intro">
-      <!-- Optional: upload /hero.mp4 and /hero-poster.jpg -->
       <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="/hero-poster.jpg">
         <source src="/hero.mp4" type="video/mp4"/>
       </video>
@@ -36,15 +35,12 @@
             Give every visitor a personal branded assistant that works around the clock. Built for trust and easy to use.
           </p>
           <div class="cta-row">
-            <a href="#demo" class="btn btn-lg">See it in action</a>
-            <a href="#contact" class="btn btn-ghost btn-lg">Contact us</a>
+            <a href="#demo" class="btn btn-lg btn-primary">See it in action</a>
+            <a href="#contact" class="btn btn-lg btn-secondary">Contact us</a>
           </div>
         </div>
       </div>
-
-      <button class="scroll-cue" aria-label="Scroll to demo" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">
-        <span></span>
-      </button>
+      <!-- scroll-cue removed -->
     </section>
 
     <!-- DEMO (near top) -->
@@ -55,7 +51,6 @@
           Experience an assistant that speaks in your brand voice and handles conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
-          <!-- Replace placeholder with your embed when ready -->
           <div class="demo-placeholder">
             <p>Demo coming soon. Your assistant will appear here.</p>
           </div>
@@ -84,33 +79,28 @@
       </div>
     </section>
 
-    <!-- CONTACT (inputs larger, email line smaller) -->
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">Contact us</h2>
 
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate data-anim="fade-up" data-delay="60">
-          <!-- Honeypot -->
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="60">
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
-
           <label class="field">
             <span class="label">Full Name</span>
             <input type="text" name="full_name" required autocomplete="name"/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">Business Website</span>
             <input type="url" name="website" placeholder="https://example.com" required/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">Email</span>
             <input type="email" name="_replyto" required autocomplete="email"/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">What should the assistant do?</span>
             <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, and any tools to connect."></textarea>
@@ -118,8 +108,8 @@
           </label>
 
           <div class="cta-row form-ctas">
-            <button type="submit" class="btn btn-full btn-lg">Send</button>
-            <a href="#main" class="btn btn-ghost btn-lg">Back to top</a>
+            <button type="submit" class="btn btn-full btn-lg btn-primary">Send</button>
+            <a href="#main" class="btn btn-lg btn-secondary">Back to top</a>
           </div>
 
           <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
