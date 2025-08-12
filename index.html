@@ -176,5 +176,49 @@
   </script>
 
   <script src="/script.js" defer></script>
+ <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+<script>
+  // IMPORTANT: Ensure there is NO other Botpress <script src="... .js"> on the page.
+  window.botpress.init({
+    botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+    clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+    configuration: {
+      version: "v1",
+      botName: "FlowBot",
+      themeMode: "dark",
+      color: "#3276EA",
+      variant: "solid",
+      headerVariant: "solid",
+      fontFamily: "inter",
+      radius: 4,
+      feedbackEnabled: false
+    }
+  });
+
+  window.botpress.on('webchat:ready', () => {
+    // 1) Remove the floating bubble
+    const fab = document.querySelector('.bpFab');
+    if (fab) fab.style.display = 'none';
+
+    // 2) Move the widget into the demo container
+    const target = document.getElementById('webchat-container');
+    const wc = document.querySelector('.bpWebchat');
+    if (target && wc && wc.parentNode !== target) target.appendChild(wc);
+
+    // 3) Make it fill the container and show it open
+    if (wc) {
+      wc.style.position = 'absolute';
+      wc.style.inset = '0';
+      wc.style.width = '100%';
+      wc.style.height = '100%';
+      wc.style.maxHeight = '100%';
+      wc.style.borderRadius = '16px';
+      wc.style.zIndex = '2147483647';
+    }
+    // Ensure the panel is open
+    if (window.botpress && window.botpress.open) window.botpress.open();
+  });
+</script>
+
 </body>
 </html>
