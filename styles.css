@@ -140,3 +140,9 @@ body{
 .hero .cta-row {
   margin-bottom: 1.5rem; /* smaller gap under buttons */
 }
+/* Remove extra gap now that video is gone */
+.hero,
+.hero-video {
+  min-height: auto !important;
+  padding-bottom: 2rem !important;
+}
