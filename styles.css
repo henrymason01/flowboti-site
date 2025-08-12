@@ -46,7 +46,7 @@ body{
 .scroll-cue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:transparent;border:0;cursor:pointer;opacity:.8}
 .scroll-cue span{display:block;width:22px;height:32px;border:2px solid rgba(255,255,255,.5);border-radius:12px;position:relative}
 .scroll-cue span::after{content:"";position:absolute;left:50%;top:6px;transform:translateX(-50%);width:4px;height:6px;border-radius:3px;background:#fff;animation:wheel 1.6s infinite}
-@keyframes wheel{0%{transform:translate(-50%,0)}60%{transform:translate(-50%,8px)}100%{transform:translate(-50%,0)}}
+@keyframes wheel{0%{transform:translate(-50%,0)}60%{transform:translate(-50%,8px)}100%{transform:translate(-50%,0)}
 
 /* Sections */
 .section{padding:var(--section) 0}
@@ -62,10 +62,6 @@ body{
 .tile{background:var(--card);border:1px solid var(--border);padding:22px;border-radius:var(--radius);transition:transform .18s ease, box-shadow .18s ease;will-change:transform}
 .tile:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.25)}
 .tile h3{font-size:var(--fz-h3);margin:0 0 8px}
-
-/* Logos strip */
-.logos .logos-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:8px}
-.logo-badge{background:rgba(255,255,255,.06);border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-weight:700}
 
 /* Contact */
 .contact-form{max-width:880px;margin:0 auto}
