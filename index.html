@@ -11,7 +11,6 @@
   <meta name="theme-color" content="#0b0d13"/>
 </head>
 <body>
-  <!-- Header -->
   <header class="nav">
     <div class="container nav-inner-center">
       <a class="brand-center" href="/">
@@ -22,7 +21,6 @@
   </header>
 
   <main id="main">
-    <!-- HERO with optional background video -->
     <section class="hero hero-video" aria-label="Intro">
       <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="/hero-poster.jpg">
         <source src="/hero.mp4" type="video/mp4"/>
@@ -30,34 +28,23 @@
 
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
-          <h1>Your dedicated Automated Assistant, without the overhead.</h1>
+          <h1>Automated Assistants that feel effortless</h1>
           <p class="sub">
-            Delight clients with a personal, branded assistant that works 24/7 — designed for trust, not tech.
+            Give every visitor a personal branded assistant that works around the clock. Built for trust and easy to use.
           </p>
           <div class="cta-row">
-            <a href="#demo" class="btn">See it in action</a>
-            <a href="#contact" class="link">Contact us</a>
+            <a href="#demo" class="btn btn-lg btn-primary">See it in action</a>
+            <a href="#contact" class="btn btn-lg btn-secondary">Contact us</a>
           </div>
         </div>
-
-        <ul class="hero-ticks" data-anim="stagger-up">
-          <li>Clients served, not queued</li>
-          <li>Always on-brand responses</li>
-          <li>Focus on growth; we handle the conversation</li>
-        </ul>
       </div>
-
-      <button class="scroll-cue" aria-label="Scroll to demo" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">
-        <span></span>
-      </button>
     </section>
 
-    <!-- DEMO near top -->
     <section id="demo" class="section alt">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">See your future Automated Assistant in action</h2>
+        <h2 class="center" data-anim="fade-up">See your Automated Assistant in action</h2>
         <p class="center muted" data-anim="fade-up" data-delay="80">
-          Experience an assistant that understands your brand voice and works silently behind the scenes.
+          Experience an assistant that speaks in your brand voice and handles conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
           <div class="demo-placeholder">
@@ -67,61 +54,59 @@
       </div>
     </section>
 
-    <!-- VALUE / OUTCOMES -->
     <section class="section">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">Designed for real business outcomes</h2>
+        <h2 class="center" data-anim="fade-up">Why businesses choose FlowBotAI</h2>
         <div class="grid-3">
           <article class="tile" data-anim="slide-up">
-            <h3>Elegant First Impressions</h3>
-            <p>Your assistant presents your value with clarity and confidence — every time.</p>
+            <h3>Strong First Impressions</h3>
+            <p>Your assistant greets clients clearly and professionally every time.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>Operational Peace of Mind</h3>
-            <p>Automated, yet personal — consistent client engagement on autopilot.</p>
+            <h3>Consistency and Reliability</h3>
+            <p>Engage customers at any hour without losing quality in responses.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="120">
-            <h3>Scalable Excellence</h3>
-            <p>Grow without adding headcount; bookings, handoff, and lead capture built-in.</p>
+            <h3>Growth Without Stress</h3>
+            <p>Scale your business while we handle the conversations.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">Contact us</h2>
 
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="60">
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
-
           <label class="field">
             <span class="label">Full Name</span>
             <input type="text" name="full_name" required autocomplete="name"/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">Business Website</span>
             <input type="url" name="website" placeholder="https://example.com" required/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">Email</span>
             <input type="email" name="_replyto" required autocomplete="email"/>
             <span class="error"></span>
           </label>
-
           <label class="field">
             <span class="label">What should the assistant do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, handoffs, tools to connect (e.g., Calendly/CRM)."></textarea>
+            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, and any tools to connect."></textarea>
             <span class="error"></span>
           </label>
 
-          <button type="submit" class="btn btn-full">Send</button>
-          <p class="contact-email center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
+          <div class="cta-row form-ctas">
+            <button type="submit" class="btn btn-full btn-lg btn-primary">Send</button>
+            <a href="#main" class="btn btn-lg btn-secondary">Back to top</a>
+          </div>
+
+          <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
           <p id="form-status" class="status"></p>
         </form>
       </div>
