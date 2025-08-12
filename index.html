@@ -23,28 +23,23 @@
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero hero-video" aria-label="Intro">
-      <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="/hero-poster.jpg">
-        <source src="/hero.mp4" type="video/mp4"/>
-      </video>
+<section class="hero">
+  <div class="hero__inner">
+    <h1 class="hero__title">
+      Your dedicated Automated Assistant<br />without the overhead
+    </h1>
 
-      <div class="container hero-inner">
-        <div class="hero-copy" data-anim="fade-up">
-          <h1>Your dedicated Automated Assistant without the overhead</h1>
-          <p class="sub">
-            Provide your clients with a personal branded assistant that works around the clock. Designed to build trust and feel effortless to use.
-          </p>
-          <div class="cta-row">
-            <a href="#demo" class="btn">See it in action</a>
-            <a href="#contact" class="link">Contact us</a>
-          </div>
-        </div>
-      </div>
+    <p class="hero__subtitle">
+      Provide your clients with a personal branded assistant that works around the clock. 
+      Designed to build trust and feel effortless to use.
+    </p>
 
-      <button class="scroll-cue" aria-label="Scroll to demo" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">
-        <span></span>
-      </button>
-    </section>
+    <div class="hero__ctas">
+      <a href="#demo" class="btn btn--primary">See it in action</a>
+      <a href="#contact" class="btn btn--ghost">Contact us</a>
+    </div>
+  </div>
+</section>
 
     <!-- DEMO near top -->
     <section id="demo" class="section alt">
