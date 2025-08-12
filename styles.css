@@ -1,8 +1,8 @@
 :root{
   --bg:#0b0d13; --bg-2:#0f131c; --card:#151a27;
   --ink:#eef2ff; --muted:#aab3cf;
-  --brand:#6c83ff;        /* primary (blue) */
-  --accent:#1fd4a8;       /* secondary (teal) */
+  --brand:#6c83ff;        /* primary */
+  --accent:#1fd4a8;       /* secondary */
   --border:rgba(255,255,255,.10); --container:1240px;
 
   --fz-base:16.5px;
@@ -36,13 +36,13 @@ body{
 .brand-logo{height:60px;width:auto;display:block}
 .brand-name{font-size:clamp(24px,5.2vw,36px);font-weight:900;color:#fff;letter-spacing:-.02em}
 
-/* HERO (lifted higher, more space before CTAs) */
+/* HERO (tighten bottom space) */
 .hero{
   position:relative; isolation:isolate; overflow:hidden;
-  padding:56px 0 72px;       /* was 84+; reduced top to lift content */
+  padding:56px 0 40px;   /* ↓ bottom from 72px to 40px */
   min-height:72vh;
 }
-@media (min-width:980px){ .hero{padding:64px 0 90px; min-height:78vh;} }
+@media (min-width:980px){ .hero{padding:64px 0 48px; min-height:78vh;} }
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;z-index:-1;display:none}
 .hero-video .hero-bg{display:block}
 .hero-inner{display:grid;place-items:center}
@@ -52,7 +52,7 @@ body{
   color:var(--muted);
   font-size:clamp(18px,2.8vw,22px);
   line-height:1.7;
-  max-width:64ch; margin:0 auto 28px;  /* more space before CTAs */
+  max-width:64ch; margin:0 auto 28px;
   text-align:center;
 }
 
@@ -74,8 +74,9 @@ body{
   .btn-full{width:100%}
 }
 
-/* Sections */
+/* Section spacing (reduce top gap only for the Demo section) */
 .section{padding:72px 0}
+#demo.section{padding-top:44px;}   /* ↓ top padding so hero→demo gap is tighter */
 .section.alt{background:rgba(255,255,255,.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .section h2{margin:0 0 20px;font-size:var(--fz-h2);text-align:center;letter-spacing:-.01em}
 
@@ -90,7 +91,7 @@ body{
 .tile:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.25)}
 .tile h3{font-size:var(--fz-h3);margin:0 0 6px}
 
-/* Contact (inputs bigger, email smaller) */
+/* Contact */
 .contact-form{max-width:880px;margin:0 auto}
 .contact-form .field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .field .label{font-weight:700;color:#d7defa}
@@ -102,7 +103,15 @@ body{
 .hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 .status{margin-top:12px;color:#d7defa}
 .error{color:#ffb3b3;font-size:14px;min-height:18px}
-.contact-email-small{font-size:.9rem;font-weight:400;margin-top:16px;color:var(--muted)}
+
+/* BIGGER email line */
+.contact-email-small{
+  font-size:clamp(20px,2.6vw,28px);  /* much bigger */
+  font-weight:900;
+  margin-top:22px;
+  color:#fff;                         /* white */
+  letter-spacing:-.01em;
+}
 .contact-email-small a{color:#fff !important;text-decoration:none}
 .contact-email-small a:hover{text-decoration:underline}
 
@@ -110,7 +119,7 @@ body{
 .footer{border-top:1px solid var(--border);padding:20px 0;margin-top:34px}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
 
-/* Scroll/Reveal Animations */
+/* Reveal animations */
 @media (prefers-reduced-motion:no-preference){
   [data-anim]{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
   [data-anim].in{opacity:1;transform:none}
