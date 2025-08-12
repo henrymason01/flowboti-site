@@ -1,0 +1,17 @@
+{
+  "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+  "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7",
+  "configuration": {
+    "version": "v1",
+    "botName": "FlowBot",
+    "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+    "email": { "title": "hello@flowbotai.co.uk", "link": "mailto:hello@flowbotai.co.uk" },
+    "color": "#3276EA",
+    "variant": "solid",
+    "headerVariant": "solid",
+    "themeMode": "dark",
+    "fontFamily": "inter",
+    "radius": 4,
+    "feedbackEnabled": false
+  }
+}
