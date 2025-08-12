@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -9,6 +9,41 @@
   <link rel="apple-touch-icon" href="/logo.png"/>
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
+
+  <style>
+    /* Keep hero compact (no background video) */
+    .hero, .hero-video { min-height: auto !important; padding-bottom: 2rem !important; }
+
+    /* Demo section spacing */
+    #demo h2 { margin-bottom: .5rem; }
+    #demo .muted { margin-top: 0; margin-bottom: 1rem; }
+
+    /* Embedded Botpress layout */
+    #webchat-shell{
+      display:flex; align-items:center; justify-content:center;
+      width:100%; margin:0 auto; min-height:560px;
+    }
+    #webchat-container{
+      position:relative; width:100%; max-width:900px; height:560px;
+      background:#0b0d13; border-radius:16px; overflow:hidden;
+      box-shadow:0 18px 50px rgba(0,0,0,.35);
+    }
+    @media (max-width:1024px){
+      #webchat-container{ height:500px; max-width:820px; }
+    }
+    @media (max-width:640px){
+      #webchat-shell{ min-height:520px; }
+      #webchat-container{ height:520px; max-width:95%; }
+    }
+
+    /* Ensure widget fills the card & no floating bubble */
+    .bpFab{ display:none !important; }
+    .bpWebchat{
+      position:absolute !important; inset:0 !important;
+      width:100% !important; height:100% !important; max-height:100% !important;
+      border-radius:16px !important; pointer-events:auto !important; z-index:1 !important;
+    }
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -21,7 +56,7 @@
   </header>
 
   <main id="main">
-    <section class="hero hero-video" aria-label="Intro">
+    <section class="hero" aria-label="Intro">
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
           <h1>Your website’s 24/7 sales teammate</h1>
@@ -36,34 +71,32 @@
       </div>
     </section>
 
-    <!-- DEMO SECTION WITH CHATBOT -->
+    <!-- DEMO SECTION (centered embedded chatbot) -->
     <section id="demo" class="section alt">
-  <div class="container">
-    <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
-    <p class="center muted" data-anim="fade-up" data-delay="80">
-      Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
-    </p>
-
-    <div class="demo-wrap" data-anim="fade-up" data-delay="120">
-      <!-- Centered, embedded chat area -->
-      <div id="webchat-shell">
-        <div id="webchat-container"></div>
+      <div class="container">
+        <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
+        <p class="center muted" data-anim="fade-up" data-delay="80">
+          Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
+        </p>
+        <div class="demo-wrap" data-anim="fade-up" data-delay="120">
+          <div id="webchat-shell">
+            <div id="webchat-container"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <section class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">How it works</h2>
         <div class="grid-3">
           <article class="tile" data-anim="slide-up">
-            <h3>1) Train on your content</h3>
-            <p>We learn from your site, docs, and past chats to match your tone.</p>
+            <h3>1) Drop in the snippet</h3>
+            <p>One line added to your site. No rebuild needed.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>2) Drop in the snippet</h3>
-            <p>One line added to your site. No rebuild needed.</p>
+            <h3>2) Train on your content</h3>
+            <p>We learn from your site, docs, and past chats to match your tone.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="120">
             <h3>3) Go live and track leads</h3>
@@ -147,82 +180,48 @@
   <!-- Botpress runtime -->
   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
-  <!-- Botpress config -->
+  <!-- Initialize + mount into the centered demo card -->
   <script>
     window.botpress.init({
-      "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-      "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7",
-      "configuration": {
-        "version": "v1",
-        "botName": "FlowBot",
-        "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style.",
-        "email": { "title": "hello@flowbotai.co.uk", "link": "mailto:hello@flowbotai.co.uk" },
-        "color": "#3276EA",
-        "variant": "solid",
-        "headerVariant": "solid",
-        "themeMode": "dark",
-        "fontFamily": "inter",
-        "radius": 4,
-        "feedbackEnabled": false
+      botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+      clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+      configuration: {
+        version: "v1",
+        botName: "FlowBot",
+        botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style.",
+        email: { title: "hello@flowbotai.co.uk", link: "mailto:hello@flowbotai.co.uk" },
+        color: "#3276EA",
+        variant: "solid",
+        headerVariant: "solid",
+        themeMode: "dark",
+        fontFamily: "inter",
+        radius: 4,
+        feedbackEnabled: false
       }
     });
 
-    // Place the chatbot inside the container
+    // Mount into demo + open by default
     window.botpress.on('webchat:ready', () => {
-      const container = document.getElementById('webchat-container');
-      const webchat = document.querySelector('.bpWebchat');
-      if (container && webchat) {
-        container.appendChild(webchat);
-        webchat.style.width = '100%';
-        webchat.style.height = '100%';
+      const fab = document.querySelector('.bpFab');
+      if (fab) fab.style.display = 'none'; // no floating widget
+
+      const shell = document.getElementById('webchat-container');
+      const wc = document.querySelector('.bpWebchat');
+      if (shell && wc && wc.parentNode !== shell) shell.appendChild(wc);
+
+      if (wc) {
+        wc.style.position = 'absolute';
+        wc.style.inset = '0';
+        wc.style.width = '100%';
+        wc.style.height = '100%';
+        wc.style.maxHeight = '100%';
+        wc.style.borderRadius = '16px';
       }
+
+      if (window.botpress && window.botpress.open) window.botpress.open();
     });
   </script>
 
   <script src="/script.js" defer></script>
- <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-<script>
-  // IMPORTANT: Ensure there is NO other Botpress <script src="... .js"> on the page.
-  window.botpress.init({
-    botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-    clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-    configuration: {
-      version: "v1",
-      botName: "FlowBot",
-      themeMode: "dark",
-      color: "#3276EA",
-      variant: "solid",
-      headerVariant: "solid",
-      fontFamily: "inter",
-      radius: 4,
-      feedbackEnabled: false
-    }
-  });
-
-  window.botpress.on('webchat:ready', () => {
-    // 1) Remove the floating bubble
-    const fab = document.querySelector('.bpFab');
-    if (fab) fab.style.display = 'none';
-
-    // 2) Move the widget into the demo container
-    const target = document.getElementById('webchat-container');
-    const wc = document.querySelector('.bpWebchat');
-    if (target && wc && wc.parentNode !== target) target.appendChild(wc);
-
-    // 3) Make it fill the container and show it open
-    if (wc) {
-      wc.style.position = 'absolute';
-      wc.style.inset = '0';
-      wc.style.width = '100%';
-      wc.style.height = '100%';
-      wc.style.maxHeight = '100%';
-      wc.style.borderRadius = '16px';
-      wc.style.zIndex = '2147483647';
-    }
-    // Ensure the panel is open
-    if (window.botpress && window.botpress.open) window.botpress.open();
-  });
-</script>
-
 </body>
 </html>
