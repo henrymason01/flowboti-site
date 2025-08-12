@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#0b0d13"/>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Minimal Header -->
   <header class="nav">
     <div class="container nav-inner-center">
       <a class="brand-center" href="/">
@@ -22,30 +22,24 @@
   </header>
 
   <main id="main">
-    <!-- HERO with optional background video -->
+    <!-- HERO (centered, taller, less top padding) -->
     <section class="hero hero-video" aria-label="Intro">
-      <!-- Optional: upload /hero.mp4 (muted, 10–15s) and /hero-poster.jpg -->
+      <!-- Optional: upload /hero.mp4 and /hero-poster.jpg -->
       <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="/hero-poster.jpg">
         <source src="/hero.mp4" type="video/mp4"/>
       </video>
 
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
-          <h1>Your dedicated Automated Assistant, without the overhead.</h1>
+          <h1>Automated Assistants that feel effortless</h1>
           <p class="sub">
-            Delight clients with a personal, branded assistant that works 24/7 — designed for trust, not tech.
+            Give every visitor a personal branded assistant that works around the clock. Built for trust and easy to use.
           </p>
           <div class="cta-row">
-            <a href="#demo" class="btn">See it in action</a>
-            <a href="#contact" class="link">Contact us</a>
+            <a href="#demo" class="btn btn-lg">See it in action</a>
+            <a href="#contact" class="btn btn-ghost btn-lg">Contact us</a>
           </div>
         </div>
-
-        <ul class="hero-ticks" data-anim="stagger-up">
-          <li>Clients served, not queued</li>
-          <li>Always on-brand responses</li>
-          <li>Focus on growth; we handle the conversation</li>
-        </ul>
       </div>
 
       <button class="scroll-cue" aria-label="Scroll to demo" onclick="document.querySelector('#demo').scrollIntoView({behavior:'smooth'})">
@@ -53,12 +47,12 @@
       </button>
     </section>
 
-    <!-- DEMO near top -->
+    <!-- DEMO (near top) -->
     <section id="demo" class="section alt">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">See your future Automated Assistant in action</h2>
+        <h2 class="center" data-anim="fade-up">See your Automated Assistant in action</h2>
         <p class="center muted" data-anim="fade-up" data-delay="80">
-          Experience an assistant that understands your brand voice and works silently behind the scenes.
+          Experience an assistant that speaks in your brand voice and handles conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
           <!-- Replace placeholder with your embed when ready -->
@@ -72,65 +66,30 @@
     <!-- VALUE / OUTCOMES -->
     <section class="section">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">Designed for real business outcomes</h2>
+        <h2 class="center" data-anim="fade-up">Why businesses choose FlowBotAI</h2>
         <div class="grid-3">
           <article class="tile" data-anim="slide-up">
-            <h3>Elegant First Impressions</h3>
-            <p>Your assistant presents your value with clarity and confidence — every time.</p>
+            <h3>Strong First Impressions</h3>
+            <p>Your assistant greets clients clearly and professionally every time.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>Operational Peace of Mind</h3>
-            <p>Automated, yet personal — consistent client engagement on autopilot.</p>
+            <h3>Consistency and Reliability</h3>
+            <p>Engage customers at any hour without losing quality in responses.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="120">
-            <h3>Scalable Excellence</h3>
-            <p>Grow without adding headcount; bookings, handoff, and lead capture built-in.</p>
+            <h3>Growth Without Stress</h3>
+            <p>Scale your business while we handle the conversations.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- COMPATIBILITY / SOCIAL PROOF -->
-    <section class="section alt">
-      <div class="container logos" data-anim="fade-up">
-        <div class="logos-row">
-          <span class="logo-badge">Professional Services</span>
-          <span class="logo-badge">Wealth / Real Estate</span>
-          <span class="logo-badge">Healthcare</span>
-          <span class="logo-badge">E-commerce</span>
-          <span class="logo-badge">Hospitality</span>
-        </div>
-        <p class="muted center small">Works with your stack — Calendly, HubSpot, Google Sheets & more.</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section">
-      <div class="container">
-        <h2 class="center" data-anim="fade-up">FAQ</h2>
-        <div class="faq" data-anim="fade-up" data-delay="60">
-          <details>
-            <summary>Do we need to rebuild our website?</summary>
-            <p>No — you paste a short embed. We handle setup and maintenance.</p>
-          </details>
-          <details>
-            <summary>How quickly can we launch?</summary>
-            <p>Most assistants go live within a few days of receiving your content and goals.</p>
-          </details>
-          <details>
-            <summary>Can it respect compliance or approvals?</summary>
-            <p>Yes. We can restrict topics, add internal review, and log interactions.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
+    <!-- CONTACT (inputs larger, email line smaller) -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">Contact us</h2>
 
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="60">
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate data-anim="fade-up" data-delay="60">
           <!-- Honeypot -->
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
 
@@ -154,12 +113,16 @@
 
           <label class="field">
             <span class="label">What should the assistant do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, handoffs, tools to connect (e.g., Calendly/CRM)."></textarea>
+            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, and any tools to connect."></textarea>
             <span class="error"></span>
           </label>
 
-          <button type="submit" class="btn btn-full">Send</button>
-          <p class="contact-email center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
+          <div class="cta-row form-ctas">
+            <button type="submit" class="btn btn-full btn-lg">Send</button>
+            <a href="#main" class="btn btn-ghost btn-lg">Back to top</a>
+          </div>
+
+          <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
           <p id="form-status" class="status"></p>
         </form>
       </div>
