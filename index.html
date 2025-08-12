@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -9,54 +9,6 @@
   <link rel="apple-touch-icon" href="/logo.png"/>
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
-  <style>
-    /* Fix hero section gap without video */
-    .hero, .hero-video {
-      min-height: auto !important;
-      padding-bottom: 2rem !important;
-    }
-
-    /* Demo section tighter spacing */
-    #demo .demo-wrap { padding-top: 0.5rem; }
-    #demo h2 { margin-bottom: .5rem; }
-    #demo .muted { margin-top: 0; margin-bottom: 1rem; }
-
-    /* Chat container styling */
-    #webchat-container {
-      position: relative;
-      width: 100%;
-      max-width: 1100px;
-      height: 640px;
-      margin: 0 auto;
-      background: #0b0d13;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    /* On tablets & smaller screens */
-    @media (max-width: 1024px) {
-      #webchat-container { height: 500px; }
-    }
-
-    /* On phones */
-    @media (max-width: 600px) {
-      #webchat-container {
-        height: calc(100vh - 200px);
-        max-height: 600px;
-      }
-    }
-
-    /* Chatbot appearance */
-    .bpFab { display: none !important; }
-    .bpWebchat {
-      border-radius: 16px !important;
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      max-height: 100% !important;
-    }
-  </style>
 </head>
 <body>
   <header class="nav">
@@ -69,7 +21,7 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-label="Intro">
+    <section class="hero hero-video" aria-label="Intro">
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
           <h1>Your website’s 24/7 sales teammate</h1>
@@ -84,6 +36,7 @@
       </div>
     </section>
 
+    <!-- DEMO SECTION WITH CHATBOT -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
@@ -91,35 +44,7 @@
           Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
-          <div id="webchat-container">
-            <!-- Botpress runtime -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-<script>
-  window.botpress.init({
-                "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-                "configuration": {
-                  "version": "v1",
-                  "botName": "FlowBot",
-                  "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
-                  "email": { "title": "hello@flowbotai.co.uk", "link": "hello@flowbotai.co.uk" },
-                  "color": "#3276EA",
-                  "variant": "solid",
-                  "headerVariant": "solid",
-                  "themeMode": "dark",
-                  "fontFamily": "inter",
-                  "radius": 4,
-                  "feedbackEnabled": false,
-                  "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-                  "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
-                },
-                "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
-              });
-              window.botpress.on('webchat:ready', () => {
-                const fab = document.querySelector('.bpFab');
-                if (fab) fab.style.display = 'none';
-              });
-            </script>
-          </div>
+          <div id="webchat-container" style="position: relative; width: 100%; height: 640px; max-width: 1100px; margin: 0 auto; background: #0b0d13; border-radius: 16px; overflow: hidden;"></div>
         </div>
       </div>
     </section>
@@ -129,12 +54,12 @@
         <h2 class="center" data-anim="fade-up">How it works</h2>
         <div class="grid-3">
           <article class="tile" data-anim="slide-up">
-            <h3>1) Drop in the snippet</h3>
-            <p>One line added to your site. No rebuild needed.</p>
+            <h3>1) Train on your content</h3>
+            <p>We learn from your site, docs, and past chats to match your tone.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>2) Train on your content</h3>
-            <p>We learn from your site, docs, and past chats to match your tone.</p>
+            <h3>2) Drop in the snippet</h3>
+            <p>One line added to your site. No rebuild needed.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="120">
             <h3>3) Go live and track leads</h3>
@@ -168,30 +93,42 @@
       <div class="container">
         <h2 class="center" data-anim="fade-up">Contact us</h2>
         <p class="center muted" data-anim="fade-up" data-delay="60">Tell us a bit about your business. We’ll reply within one working day.</p>
+
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate data-anim="fade-up" data-delay="100" data-formspree>
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
+
           <label class="field">
             <span class="label">Full name</span>
-            <input type="text" name="full_name" required autocomplete="name"/>
+            <input type="text" name="full_name" required autocomplete="name" inputmode="text"/>
+            <span class="error"></span>
           </label>
+
           <label class="field">
             <span class="label">Business website</span>
             <input type="url" name="website" placeholder="https://example.com" required/>
+            <span class="error"></span>
           </label>
+
           <label class="field">
             <span class="label">Work email</span>
-            <input type="email" name="_replyto" required/>
+            <input type="email" name="_replyto" required autocomplete="email" inputmode="email"/>
+            <span class="error"></span>
           </label>
+
           <label class="field">
             <span class="label">What should the assistant do?</span>
             <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, integrations to connect, booking link, and success measure."></textarea>
+            <span class="error"></span>
           </label>
+
           <input type="hidden" name="source" value="flowbotai.co.uk"/>
           <div class="cta-row form-ctas">
-            <button type="submit" class="btn btn-full btn-lg btn-primary">Send</button>
+            <button type="submit" class="btn btn-full btn-lg btn-primary" data-goal="form-submit">Send</button>
             <a href="#main" class="btn btn-lg btn-secondary">Back to top</a>
           </div>
+
           <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
@@ -202,40 +139,42 @@
       <span>© <span id="year"></span> FlowBotAI</span>
     </div>
   </footer>
+
+  <!-- Botpress runtime -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+
+  <!-- Botpress config -->
+  <script>
+    window.botpress.init({
+      "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+      "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7",
+      "configuration": {
+        "version": "v1",
+        "botName": "FlowBot",
+        "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style.",
+        "email": { "title": "hello@flowbotai.co.uk", "link": "mailto:hello@flowbotai.co.uk" },
+        "color": "#3276EA",
+        "variant": "solid",
+        "headerVariant": "solid",
+        "themeMode": "dark",
+        "fontFamily": "inter",
+        "radius": 4,
+        "feedbackEnabled": false
+      }
+    });
+
+    // Place the chatbot inside the container
+    window.botpress.on('webchat:ready', () => {
+      const container = document.getElementById('webchat-container');
+      const webchat = document.querySelector('.bpWebchat');
+      if (container && webchat) {
+        container.appendChild(webchat);
+        webchat.style.width = '100%';
+        webchat.style.height = '100%';
+      }
+    });
+  </script>
+
   <script src="/script.js" defer></script>
-<!-- Botpress runtime -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-
-<!-- Botpress config -->
-<script>
-  window.botpress.init({
-    "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-    "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7",
-    "configuration": {
-      "version": "v1",
-      "botName": "FlowBot",
-      "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style.",
-      "email": { "title": "hello@flowbotai.co.uk", "link": "mailto:hello@flowbotai.co.uk" },
-      "color": "#3276EA",
-      "variant": "solid",
-      "headerVariant": "solid",
-      "themeMode": "dark",
-      "fontFamily": "inter",
-      "radius": 4,
-      "feedbackEnabled": false
-    }
-  });
-
-  // Place the chatbot inside the container
-  window.botpress.on('webchat:ready', () => {
-    const container = document.getElementById('webchat-container');
-    const webchat = document.querySelector('.bpWebchat');
-    if (container && webchat) {
-      container.appendChild(webchat);
-      webchat.style.width = '100%';
-      webchat.style.height = '100%';
-    }
-  });
-</script>
 </body>
 </html>
