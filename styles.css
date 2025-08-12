@@ -127,3 +127,16 @@ body{
   [data-anim="fade-up"]{transform:translateY(18px)}
   [data-anim][data-delay]{transition-delay:calc(var(--d,0ms) + 0ms)}
 }
+/* Reduce gap between hero buttons and next section */
+.hero {
+  padding-bottom: 2rem; /* reduce from whatever it was before */
+}
+
+.hero + .section,
+.hero + .alt {
+  margin-top: 0; /* remove extra gap above next section */
+}
+
+.hero .cta-row {
+  margin-bottom: 1.5rem; /* smaller gap under buttons */
+}
