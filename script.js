@@ -11,6 +11,11 @@ if (!prefersReduced && 'IntersectionObserver' in window) {
         const delay = e.target.getAttribute('data-delay');
         if (delay) e.target.style.setProperty('--d', `${parseInt(delay,10)}ms`);
         e.target.classList.add('in');
+        if (e.target.dataset.anim === 'stagger-up') {
+          [...e.target.children].forEach((child, i) => {
+            child.style.transitionDelay = `${80 * i}ms`;
+          });
+        }
         io.unobserve(e.target);
       }
     });
