@@ -102,3 +102,20 @@ body{
   .brand-logo{height:64px}
   .demo-placeholder{min-height:300px}
 }
+/* Larger text for Contact Us section */
+#contact {
+  font-size: 1.2em; /* Increase all text in the section */
+}
+
+#contact .label {
+  font-size: 1.1em; /* Slightly larger labels */
+}
+
+#contact input,
+#contact textarea {
+  font-size: 1em; /* Larger input text */
+}
+
+#contact .contact-email {
+  font-size: clamp(32px, 4vw, 46px); /* Make email link bigger */
+}
