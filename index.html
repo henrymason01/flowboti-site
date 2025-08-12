@@ -22,7 +22,7 @@
 
   <main id="main">
     <section class="hero hero-video" aria-label="Intro">
-<div class="container hero-inner">
+      <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
           <h1>Your website’s 24/7 sales teammate</h1>
           <p class="sub">
@@ -43,40 +43,89 @@
           Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
-           <div id="webchat-container" style="position: relative; width: 100%; height: 640px; max-width: 1100px; margin: 0 auto;">
-  <!-- Botpress runtime -->
-  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
-  <script>
-    // Paste your Botpress init config here
-    window.botpress.init({
-      "botId": "YOUR_BOT_ID",
-      "clientId": "YOUR_CLIENT_ID",
-      "configuration": {
-        "variant": "soft",
-        "themeMode": "dark",
-        "fontFamily": "Inter",
-        "avatarUrl": "https://flowbotai.co.uk/logo.png" // optional logo
-      }
-    });
+          <div id="webchat-container">
+            <!-- Botpress runtime -->
+            <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
-    // Force inline view
-    window.botpress.on('webchat:ready', () => {
-      document.querySelector('.bpFab').style.display = 'none'; // Hide floating bubble
-      document.querySelector('.bpWebchat').style.position = 'absolute';
-      document.querySelector('.bpWebchat').style.inset = '0';
-      document.querySelector('.bpWebchat').style.width = '100%';
-      document.querySelector('.bpWebchat').style.height = '100%';
-    });
-  </script>
+            <!-- Inline Botpress init config -->
+            <script>
+              window.botpress.init({
+                "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+                "configuration": {
+                  "version": "v1",
+                  "botName": "FlowBot",
+                  "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+                  "website": {},
+                  "email": {
+                    "title": "hello@flowbotai.co.uk",
+                    "link": "hello@flowbotai.co.uk"
+                  },
+                  "phone": {},
+                  "termsOfService": {},
+                  "privacyPolicy": {},
+                  "color": "#3276EA",
+                  "variant": "solid",
+                  "headerVariant": "solid",
+                  "themeMode": "dark",
+                  "fontFamily": "inter",
+                  "radius": 4,
+                  "feedbackEnabled": false,
+                  "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+                  "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
+                },
+                "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
+              });
 
-  <!-- Optional: Match your FlowBotAI brand style -->
-  <style>
-    #webchat-container { background-color: #0b0d13; }
-    .bpWebchat { border-radius: 16px !important; }
-  </style>
-</div>
-     </div>
+              // Force inline embed
+              window.botpress.on('webchat:ready', () => {
+                const fab = document.querySelector('.bpFab');
+                if (fab) fab.style.display = 'none';
+                const wc = document.querySelector('.bpWebchat');
+                if (wc) {
+                  wc.style.position = 'absolute';
+                  wc.style.inset = '0';
+                  wc.style.width = '100%';
+                  wc.style.height = '100%';
+                  wc.style.maxHeight = '100%';
+                }
+              });
+            </script>
+
+            <!-- Styling for responsiveness -->
+            <style>
+              #webchat-container {
+                position: relative;
+                width: 100%;
+                max-width: 1100px;
+                height: 640px;
+                margin: 0 auto;
+                background: #0b0d13;
+                border-radius: 16px;
+                overflow: hidden;
+              }
+
+              /* On tablets & smaller screens, reduce height */
+              @media (max-width: 1024px) {
+                #webchat-container {
+                  height: 500px;
+                }
+              }
+
+              /* On phones, make it nearly full viewport height */
+              @media (max-width: 600px) {
+                #webchat-container {
+                  height: calc(100vh - 200px);
+                  max-height: 600px;
+                }
+              }
+
+              .bpFab { display: none !important; }
+              .bpWebchat { border-radius: 16px !important; }
+            </style>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -125,9 +174,7 @@
         <h2 class="center" data-anim="fade-up">Contact us</h2>
         <p class="center muted" data-anim="fade-up" data-delay="60">Tell us a bit about your business. We’ll reply within one working day.</p>
 
-        <!-- NOTE: Replace YOUR_FORM_ID with your Formspree form ID -->
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate data-anim="fade-up" data-delay="100" data-formspree>
-          <!-- honeypot -->
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
 
           <label class="field">
