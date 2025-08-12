@@ -63,6 +63,10 @@ body{
 .tile:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.25)}
 .tile h3{font-size:var(--fz-h3);margin:0 0 8px}
 
+/* Logos strip */
+.logos .logos-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:8px}
+.logo-badge{background:rgba(255,255,255,.06);border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-weight:700}
+
 /* Contact */
 .contact-form{max-width:880px;margin:0 auto}
 .contact-form .field{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
