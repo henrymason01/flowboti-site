@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>FlowBotAI — Your Dedicated Automated Assistant</title>
-  <meta name="description" content="Delight clients with a personal, branded automated assistant that works 24/7. Elegant, trusted, effortless. See the demo and contact us."/>
+  <title>FlowBotAI — AI assistants that turn visitors into leads</title>
+  <meta name="description" content="Capture more enquiries with a branded AI assistant that works 24/7. Book a quick demo and see how FlowBotAI qualifies, routes, and replies to your visitors."/>
   <link rel="icon" href="/logo.png" type="image/png"/>
   <link rel="apple-touch-icon" href="/logo.png"/>
   <link rel="stylesheet" href="/styles.css"/>
@@ -13,7 +13,7 @@
 <body>
   <header class="nav">
     <div class="container nav-inner-center">
-      <a class="brand-center" href="/">
+      <a class="brand-center" href="#main" data-goal="nav-home">
         <img src="/logo.png" alt="FlowBotAI logo" class="brand-logo"/>
         <span class="brand-name">FlowBotAI</span>
       </a>
@@ -28,13 +28,13 @@
 
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
-          <h1>Automated Assistants that feel effortless</h1>
+          <h1>Your website’s 24/7 sales teammate</h1>
           <p class="sub">
-            Give every visitor a personal branded assistant that works around the clock. Built for trust and easy to use.
+            Capture more enquiries while you sleep. A branded AI assistant that answers questions, books calls, and qualifies leads.
           </p>
           <div class="cta-row">
-            <a href="#demo" class="btn btn-lg btn-primary">See it in action</a>
-            <a href="#contact" class="btn btn-lg btn-secondary">Contact us</a>
+            <a href="#demo" class="btn btn-lg btn-primary" data-goal="hero-see-demo">See it in action</a>
+            <a href="#contact" class="btn btn-lg btn-secondary" data-goal="hero-get-demo">Get a demo</a>
           </div>
         </div>
       </div>
@@ -42,9 +42,9 @@
 
     <section id="demo" class="section alt">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">See your Automated Assistant in action</h2>
+        <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
         <p class="center muted" data-anim="fade-up" data-delay="80">
-          Experience an assistant that speaks in your brand voice and handles conversations with care.
+          Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
         </p>
         <div class="demo-wrap" data-anim="fade-up" data-delay="120">
           <div class="demo-placeholder">
@@ -56,19 +56,39 @@
 
     <section class="section">
       <div class="container">
+        <h2 class="center" data-anim="fade-up">How it works</h2>
+        <div class="grid-3">
+          <article class="tile" data-anim="slide-up">
+            <h3>1) Drop in the snippet</h3>
+            <p>One line added to your site. No rebuild needed.</p>
+          </article>
+          <article class="tile" data-anim="slide-up" data-delay="60">
+            <h3>2) Train on your content</h3>
+            <p>We learn from your site, docs, and past chats to match your tone.</p>
+          </article>
+          <article class="tile" data-anim="slide-up" data-delay="120">
+            <h3>3) Go live and track leads</h3>
+            <p>See conversations, booked calls, and qualified enquiries in one place.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
         <h2 class="center" data-anim="fade-up">Why businesses choose FlowBotAI</h2>
         <div class="grid-3">
           <article class="tile" data-anim="slide-up">
-            <h3>Strong First Impressions</h3>
-            <p>Your assistant greets clients clearly and professionally every time.</p>
+            <h3>Strong first impressions</h3>
+            <p>Every visitor gets a clear, friendly welcome and fast answers.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>Consistency and Reliability</h3>
-            <p>Engage customers at any hour without losing quality in responses.</p>
+            <h3>Consistency and reliability</h3>
+            <p>Always on. Always accurate on routine questions.</p>
           </article>
           <article class="tile" data-anim="slide-up" data-delay="120">
-            <h3>Growth Without Stress</h3>
-            <p>Scale your business while we handle the conversations.</p>
+            <h3>Growth without stress</h3>
+            <p>Scale conversations while your team focuses on high value work.</p>
           </article>
         </div>
       </div>
@@ -76,38 +96,46 @@
 
     <section id="contact" class="section">
       <div class="container">
-        <h2 class="center" data-anim="fade-up">Contact us</h2>
+        <h2 class="center" data-anim="fade-up">Book a quick demo</h2>
+        <p class="center muted" data-anim="fade-up" data-delay="60">Tell us a bit about your business. We’ll reply within one working day.</p>
 
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="60">
+        <!-- NOTE: Replace YOUR_FORM_ID with your Formspree form ID -->
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate data-anim="fade-up" data-delay="100" data-formspree>
+          <!-- honeypot -->
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
+
           <label class="field">
-            <span class="label">Full Name</span>
-            <input type="text" name="full_name" required autocomplete="name"/>
+            <span class="label">Full name</span>
+            <input type="text" name="full_name" required autocomplete="name" inputmode="text"/>
             <span class="error"></span>
           </label>
+
           <label class="field">
-            <span class="label">Business Website</span>
+            <span class="label">Business website</span>
             <input type="url" name="website" placeholder="https://example.com" required/>
             <span class="error"></span>
           </label>
+
           <label class="field">
-            <span class="label">Email</span>
-            <input type="email" name="_replyto" required autocomplete="email"/>
-            <span class="error"></span>
-          </label>
-          <label class="field">
-            <span class="label">What should the assistant do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, and any tools to connect."></textarea>
+            <span class="label">Work email</span>
+            <input type="email" name="_replyto" required autocomplete="email" inputmode="email"/>
             <span class="error"></span>
           </label>
 
+          <label class="field">
+            <span class="label">What should the assistant do?</span>
+            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, integrations to connect, booking link, and success measure."></textarea>
+            <span class="error"></span>
+          </label>
+
+          <input type="hidden" name="source" value="flowbotai.co.uk"/>
           <div class="cta-row form-ctas">
-            <button type="submit" class="btn btn-full btn-lg btn-primary">Send</button>
+            <button type="submit" class="btn btn-full btn-lg btn-primary" data-goal="form-submit">Request demo</button>
             <a href="#main" class="btn btn-lg btn-secondary">Back to top</a>
           </div>
 
           <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
-          <p id="form-status" class="status"></p>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
