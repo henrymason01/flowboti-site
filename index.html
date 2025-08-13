@@ -182,5 +182,39 @@
 
   <!-- Important: NO Botpress JS here. The iframe above is all we need. -->
   <script src="/script.js" defer></script>
+  <!-- Botpress engine + your hosted config -->
+<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js"></script>
+
+<!-- Mount the widget into the centered container and open it -->
+<script>
+  window.botpress.on('webchat:ready', () => {
+    // Hide floating bubble
+    const fab = document.querySelector('.bpFab');
+    if (fab) fab.style.display = 'none';
+
+    // Move chat into our demo container
+    const container = document.getElementById('webchat-container');
+    const webchat = document.querySelector('.bpWebchat');
+    if (container && webchat && webchat.parentNode !== container) {
+      container.appendChild(webchat);
+    }
+
+    // Make it fill the centered card
+    if (webchat) {
+      webchat.style.position = 'absolute';
+      webchat.style.inset = '0';
+      webchat.style.width = '100%';
+      webchat.style.height = '100%';
+      webchat.style.maxHeight = '100%';
+      webchat.style.borderRadius = '16px';
+      webchat.style.zIndex = '1';
+    }
+
+    // Open by default (optional)
+    if (window.botpress && window.botpress.open) window.botpress.open();
+  });
+</script>
+
 </body>
 </html>
