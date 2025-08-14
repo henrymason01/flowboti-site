@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FlowBotAI Chat</title>
+  <style>
+    html,body{height:100%;margin:0;background:#0b0d13}
+    /* Hide floating icon; fill the iframe */
+    .bpFab{display:none !important}
+    .bpWebchat{
+      position:absolute !important; inset:0 !important;
+      width:100% !important; height:100% !important; max-height:100% !important;
+      border-radius:16px !important;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <script>
+    // Read config from the parent site (public JSON you host)
+    const configUrl = '/bp-config.json';
+
+    // Fetch the JSON and init inline (avoids any “Access denied”)
+    fetch(configUrl).then(r => r.json()).then(cfg => {
+      window.botpress.init({
+        botId: cfg.botId,
+        clientId: cfg.clientId,
+        configuration: cfg.configuration
+      });
+      window.botpress.on('webchat:ready', () => window.botpress.open());
+    }).catch(err => {
+      document.body.innerHTML = '<div style="color:#fff;opacity:.8;font:500 15px/1.4 Inter,system-ui,Arial,sans-serif;padding:16px;text-align:center">Unable to load chat config.</div>';
+      console.error('FlowBotAI webchat error:', err);
+    });
+  </script>
+</body>
+</html>
