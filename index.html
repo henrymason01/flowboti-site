@@ -37,58 +37,101 @@
     </section>
 
     <!-- DEMO (Botpress embedded inside card) -->
+
+    <!-- DEMO (robust Botpress embed + automatic iframe fallback) -->
 <section id="demo" class="section alt">
   <div class="container">
     <h2 class="center">See your assistant in action</h2>
     <p class="center muted">Trained on your FAQs and brand voice. Ready to handle routine conversations with care.</p>
 
     <div style="display:flex;justify-content:center;align-items:center;min-height:560px;">
-      <div style="
-        position:relative;
-        width:100%;
-        max-width:900px;
-        height:560px;
-        background:#0b0d13;
-        border-radius:16px;
-        overflow:hidden;
-        box-shadow:0 18px 50px rgba(0,0,0,.35);
-      ">
+      <div id="webchat-card" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
         <!-- Bot mounts here -->
-        <div id="webchat" style="width:100%; height:100%;"></div>
+        <div id="webchat" style="position:relative;width:100%;height:100%;"></div>
 
-        <!-- Botpress runtime -->
+        <!-- Botpress runtime (only one on the page) -->
         <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
         <script>
-          window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
-          });
+          (function () {
+            // --- hard inline config (no external fetch) ---
+            const bpConfig = {
+              botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+              clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+              selector: "#webchat",
+              configuration: {
+                version: "v1",
+                botName: "FlowBot",
+                botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+                email: { title: "hello@flowbotai.co.uk", link: "hello@flowbotai.co.uk" },
+                color: "#3276EA",
+                variant: "solid",
+                headerVariant: "solid",
+                themeMode: "dark",
+                fontFamily: "inter",
+                radius: 4,
+                feedbackEnabled: false,
+                footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+                additionalStylesheetUrl: "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
+              }
+            };
 
-          window.botpress.init({
-            botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-            clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-            selector: "#webchat",
-            configuration: {
-              version: "v1",
-              botName: "FlowBot",
-              botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
-              email: { title: "hello@flowbotai.co.uk", link: "hello@flowbotai.co.uk" },
-              color: "#3276EA",
-              variant: "solid",
-              headerVariant: "solid",
-              themeMode: "dark",
-              fontFamily: "inter",
-              radius: 4,
-              feedbackEnabled: false,
-              footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-              additionalStylesheetUrl: "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
+            // Utility: size + move into the card if needed
+            function pinAndSize() {
+              const host = document.getElementById('webchat');
+              const wc = document.querySelector('.bpWebchat');
+              if (!wc) return false;
+
+              // If Botpress attached to <body>, move it into our host
+              if (host && wc.parentNode !== host) host.appendChild(wc);
+
+              // Force it to fill the card, never fullscreen
+              Object.assign(wc.style, {
+                position: 'absolute',
+                inset: '0',
+                width: '100%',
+                height: '100%',
+                maxHeight: '100%',
+                borderRadius: '16px',
+                zIndex: '10'
+              });
+              return true;
             }
-          });
+
+            // 1) Init
+            window.botpress.init(bpConfig);
+
+            // 2) When ready, open + size
+            window.botpress.on('webchat:ready', () => {
+              pinAndSize();
+              if (window.botpress.open) window.botpress.open();
+            });
+
+            // 3) Safety: watch for the widget being (re)created and re-pin it
+            const mo = new MutationObserver(() => {
+              if (pinAndSize()) { /* once we see it and size it, we can stop observing if you want */}
+            });
+            mo.observe(document.documentElement, { childList: true, subtree: true });
+
+            // 4) Final fallback after 5s — if no widget, swap in the iframe (bulletproof)
+            setTimeout(() => {
+              if (!document.querySelector('.bpWebchat')) {
+                const host = document.getElementById('webchat');
+                if (host) {
+                  host.innerHTML =
+                    '<iframe src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://flowbotai.co.uk/bp-config.json" ' +
+                    'title="FlowBotAI Demo" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13" ' +
+                    'allow="clipboard-read; clipboard-write; microphone; camera"></iframe>';
+                }
+              }
+            }, 5000);
+          })();
         </script>
 
         <style>
+          /* Keep it inside the card and hide the floating button */
           #webchat .bpWebchat {
-            position: unset !important;
+            position: unset !important; /* Botpress default override */
             width: 100% !important;
             height: 100% !important;
             max-height: 100% !important;
@@ -96,12 +139,14 @@
             border-radius: 16px !important;
           }
           #webchat .bpFab { display: none !important; }
+
+          /* Kill stray overlays just in case */
+          .bpBackdrop, .bpOverlay, .bpPortal, .bpModal, .bpDrawer { display:none !important; }
         </style>
       </div>
     </div>
   </div>
 </section>
-
 
 
     <!-- HOW IT WORKS -->
