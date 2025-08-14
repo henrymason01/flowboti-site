@@ -88,6 +88,31 @@
     },
     "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
   });
+  <script>
+  // Force the webchat into your card and remove fullscreen behavior
+  window.botpress.on('webchat:ready', () => {
+    const host = document.getElementById('webchat-container');
+    const wc = document.querySelector('.bpWebchat');
+
+    // Move the widget into your container (it defaults to <body>)
+    if (host && wc && wc.parentNode !== host) host.appendChild(wc);
+
+    // Make it fill only the card, not the whole viewport
+    if (wc) {
+      wc.style.position = 'absolute';
+      wc.style.inset = '0';
+      wc.style.width = '100%';
+      wc.style.height = '100%';
+      wc.style.maxHeight = '100%';
+      wc.style.borderRadius = '16px';
+      wc.style.zIndex = '1';
+    }
+
+    // Open the chat inline
+    if (window.botpress.open) window.botpress.open();
+  });
+</script>
+
 </script>
 
 <!-- Inline styles just for chatbot -->
