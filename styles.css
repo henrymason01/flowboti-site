@@ -1,305 +1,86 @@
 :root{
-  --bg:#0b0d13; --bg-2:#0f131c; --card:#151a27;
-  --ink:#eef2ff; --muted:#aab3cf;
-  --brand:#6c83ff;        /* primary */
-  --accent:#1fd4a8;       /* secondary */
-  --border:rgba(255,255,255,.10); --container:1240px;
-
+  --bg:#0b0d13;
+  --bg-2:#0f131c;
+  --card:#151a27;
+  --ink:#eef2ff;
+  --muted:#aab3cf;
+  --brand:#6c83ff;
+  --accent:#1fd4a8;
+  --border:rgba(255,255,255,.10);
+  --container:1240px;
   --fz-base:16.5px;
-  --fz-h1:clamp(38px,8.5vw,64px);
-  --fz-h2:clamp(24px,5.2vw,38px);
-  --fz-h3:clamp(18px,3.6vw,24px);
+}
 
-  --section:clamp(72px,12vw,140px);
-  --radius:16px;
-}
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-html{scroll-behavior:smooth}
 body{
-  font-family: Inter, ui-sans-serif, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-size:var(--fz-base); line-height:1.65; color:var(--ink);
-  background:
-    radial-gradient(1200px 600px at 75% -150px, rgba(120,140,255,.15), transparent 60%),
-    linear-gradient(180deg,var(--bg),var(--bg-2));
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-family: Inter, sans-serif;
+  font-size:var(--fz-base);
+  background: linear-gradient(180deg,var(--bg),var(--bg-2));
+  color:var(--ink);
+  margin:0;
 }
+
+/* Layout */
 .container{width:100%;max-width:var(--container);margin:0 auto;padding:0 20px}
 .center{text-align:center}
 .muted{color:var(--muted)}
-.small{font-size:14px}
 
 /* Header */
-.nav{position:sticky;top:0;z-index:60;background:rgba(11,13,19,.55);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.nav-inner-center{display:flex;align-items:center;justify-content:center;min-height:72px}
-.brand-center{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-.brand-logo{height:60px;width:auto;display:block}
-.brand-name{font-size:clamp(24px,5.2vw,36px);font-weight:900;color:#fff;letter-spacing:-.02em}
+.nav{background:rgba(11,13,19,.55);backdrop-filter:blur(10px);padding:12px 0}
+.nav-inner-center{display:flex;align-items:center;justify-content:center}
+.brand-logo{height:60px}
+.brand-name{font-weight:900;color:#fff}
 
-/* HERO (tighten bottom space) */
-.hero{
-  position:relative; isolation:isolate; overflow:hidden;
-  padding:56px 0 40px;   /* ↓ bottom from 72px to 40px */
-  min-height:auto;
-}
-@media (min-width:980px){ .hero{padding:64px 0 48px; min-height:auto;} }
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.22;z-index:-1;display:none}
-.hero-video .hero-bg{display:block}
-.hero-inner{display:grid;place-items:center}
-.hero-copy{max-width:880px;margin:0 auto;text-align:center}
-.hero-copy h1{font-size:var(--fz-h1);line-height:1.08;margin:0 0 8px;letter-spacing:-.01em;font-weight:900}
-.sub{
-  color:var(--muted);
-  font-size:clamp(18px,2.8vw,22px);
-  line-height:1.7;
-  max-width:64ch; margin:0 auto 28px;
-  text-align:center;
-}
+/* Hero */
+.hero{padding:72px 0;text-align:center}
+.hero h1{font-size:2.5rem;margin-bottom:10px}
+.sub{color:var(--muted);font-size:1.2rem;max-width:600px;margin:0 auto 20px}
 
-/* CTAs */
-.cta-row{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
-.btn{
-  display:inline-block;text-decoration:none;border-radius:14px;font-weight:800;
-  padding:18px 26px;border:1px solid transparent;box-shadow:0 10px 30px rgba(95,140,255,.18);
-  transition:transform .08s ease, filter .15s ease;
-}
-.btn:hover{filter:brightness(1.05);transform:translateY(-2px)}
-.btn-lg{font-size:clamp(16px,2.8vw,18px)}
-.btn-primary{background:var(--brand);color:#0b0d13;border-color:rgba(108,131,255,.6)}
-.btn-secondary{background:var(--accent);color:#072015;border-color:rgba(31,212,168,.6)}
+/* Buttons */
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 22px;border-radius:14px;font-weight:800;text-decoration:none;text-align:center}
+.btn-lg{font-size:1rem}
+.btn-primary{background:var(--brand);color:#0b0d13}
+.btn-secondary{background:var(--accent);color:#072015}
 .btn-full{width:100%}
-.form-ctas{margin-top:6px}
-@media (max-width:640px){
-  .cta-row{flex-direction:column;gap:10px}
-  .btn-full{width:100%}
-}
 
-/* Section spacing (reduce top gap only for the Demo section) */
+/* Sections */
 .section{padding:72px 0}
-#demo.section{padding-top:44px;}   /* ↓ top padding so hero→demo gap is tighter */
-.section.alt{background:rgba(255,255,255,.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.section h2{margin:0 0 20px;font-size:var(--fz-h2);text-align:center;letter-spacing:-.01em}
-
-/* Demo */
-.demo-wrap{border:1px dashed var(--border);border-radius:var(--radius);padding:28px;background:rgba(255,255,255,.02)}
-.demo-placeholder{display:grid;place-items:center;min-height:340px;color:var(--muted);font-weight:700}
+.section.alt{background:rgba(255,255,255,.03)}
 
 /* Grid */
 .grid-3{display:grid;grid-template-columns:1fr;gap:18px}
-@media (min-width:880px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
-.tile{background:var(--card);border:1px solid var(--border);padding:20px;border-radius:var(--radius);transition:transform .18s ease, box-shadow .18s ease}
-.tile:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.25)}
-.tile h3{font-size:var(--fz-h3);margin:0 0 6px}
+@media(min-width:880px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+.tile{background:var(--card);padding:20px;border-radius:16px;border:1px solid var(--border)}
 
 /* Contact */
-.contact-form{max-width:880px;margin:0 auto}
-.contact-form .field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.field .label{font-weight:700;color:#d7defa}
-.contact-form input,.contact-form textarea{
-  width:100%;padding:18px;border-radius:14px;border:1px solid var(--border);
-  background:#0d1018;color:#fff;outline:none;font-size:1.15rem;
-}
-.contact-form input:focus,.contact-form textarea:focus{border-color:#6e93ff99}
-.hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-.status{margin-top:12px;color:#d7defa}
-.error{color:#ffb3b3;font-size:14px;min-height:18px}
-
-/* BIGGER email line */
-.contact-email-small{
-  font-size:clamp(20px,2.6vw,28px);  /* much bigger */
-  font-weight:900;
-  margin-top:22px;
-  color:#fff;                         /* white */
-  letter-spacing:-.01em;
-}
-.contact-email-small a{color:#fff !important;text-decoration:none}
-.contact-email-small a:hover{text-decoration:underline}
+.contact-form{max-width:600px;margin:0 auto}
+.field{display:flex;flex-direction:column;margin-bottom:16px}
+.label{margin-bottom:6px;font-weight:700}
+input,textarea{padding:14px;border-radius:14px;border:1px solid var(--border);background:#0d1018;color:#fff}
 
 /* Footer */
-.footer{border-top:1px solid var(--border);padding:20px 0;margin-top:34px}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.footer{border-top:1px solid var(--border);padding:20px 0;text-align:center}
 
-/* Reveal animations */
-@media (prefers-reduced-motion:no-preference){
-  [data-anim]{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
-  [data-anim].in{opacity:1;transform:none}
-  [data-anim="slide-up"]{transform:translateY(26px)}
-  [data-anim="fade-up"]{transform:translateY(18px)}
-  [data-anim][data-delay]{transition-delay:calc(var(--d,0ms) + 0ms)}
-}
-/* Reduce gap between hero buttons and next section */
-.hero {
-  padding-bottom: 2rem; /* reduce from whatever it was before */
-}
-
-.hero + .section,
-.hero + .alt {
-  margin-top: 0; /* remove extra gap above next section */
-}
-
-.hero .cta-row {
-  margin-bottom: 1.5rem; /* smaller gap under buttons */
-}
-/* Remove extra gap now that video is gone */
-.hero,
-.hero-video {
-  min-height: auto !important;
-  padding-bottom: 2rem !important;
-}
-/* Hero gap fix (no background video) */
-.hero, .hero-video {
-  min-height: auto !important;
-  padding-bottom: 2rem !important;
-}
-
-/* Demo spacing */
-#demo .demo-wrap { padding-top: 0.5rem; }
-#demo h2 { margin-bottom: .5rem; }
-#demo .muted { margin-top: 0; margin-bottom: 1rem; }
-
-  /* --- Embedded Botpress in Demo section --- */
-#webchat-shell{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  margin:0 auto;
-  /* controls the overall height of the demo area */
-  min-height: 560px;
-}
-
+/* Chatbot container */
+#webchat-shell{display:flex;justify-content:center;align-items:center;min-height:560px}
 #webchat-container{
   position:relative;
   width:100%;
-  max-width: 900px;        /* centered card width */
-  height: 560px;           /* chat area height on desktop */
+  max-width:900px;
+  height:560px;
   background:#0b0d13;
   border-radius:16px;
   overflow:hidden;
-  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
 }
-
-@media (max-width: 1024px){
-  #webchat-container{ height:500px; max-width: 820px; }
-}
-@media (max-width: 640px){
-  #webchat-shell{ min-height: 520px; }
-  #webchat-container{
-    height: 520px;
-    max-width: 95%;
-    border-radius:16px;
-  }
-}
-
-/* make sure the widget fills the card and is clickable */
-.bpFab{ display:none !important; }                 /* hide floating bubble entirely */
+.bpFab{display:none !important}
 .bpWebchat{
   position:absolute !important;
   inset:0 !important;
   width:100% !important;
   height:100% !important;
-  max-height:100% !important;
   border-radius:16px !important;
-  pointer-events:auto !important;
-  z-index:1 !important;
 }
-
-/* (Optional) tighten heading spacing in demo */
-#demo h2{ margin-bottom:.5rem; }
-#demo .muted{ margin-top:0; margin-bottom:1rem; }
-
-/* (If you removed the hero video) keep the hero compact */
-.hero, .hero-video{ min-height:auto !important; padding-bottom:2rem !important; }
-
-
-/* Safety: if widget renders early */
-.bpFab { display: none !important; }
-.bpWebchat { border-radius: 16px !important; }
-/* Center the chat “card” in the demo section */
-#webchat-shell{
-  display:flex; align-items:center; justify-content:center;
-  width:100%; margin:0 auto; min-height:560px;
-}
-#webchat-container{
-  position:relative; width:100%; max-width:900px; height:560px;
-  background:#0b0d13; border-radius:16px; overflow:hidden;
-  box-shadow:0 18px 50px rgba(0,0,0,.35);
-}
-
-/* Responsive heights */
-@media (max-width:1024px){ #webchat-container{ height:500px; max-width:820px; } }
-@media (max-width:640px){  #webchat-container{ height:520px; max-width:95%; } }
-
-/* Safety: no floating bubble, ensure chat fills container */
-.bpFab{ display:none !important; }
-.bpWebchat{
-  position:absolute !important; inset:0 !important;
-  width:100% !important; height:100% !important; max-height:100% !important;
-  border-radius:16px !important; pointer-events:auto !important;
-}
-/* ——— Put chat above everything ——— */
-#webchat-container,
-#webchat-container * {
-  position: relative;
-  z-index: 2147483647 !important;   /* max stack */
-  pointer-events: auto !important;
-}
-
-.bpWebchat,
-.bpWebchat *,
-#webchat-container iframe {
-  position: relative !important;
-  z-index: 2147483647 !important;
-  pointer-events: auto !important;
-}
-
-/* ——— Kill any dark overlays in the demo section ——— */
-#demo .demo-wrap::before,
-#demo .demo-wrap::after,
-#demo::before,
-#demo::after {
-  content: none !important;
-  display: none !important;
-}
-
-#demo .demo-wrap,
-#demo #webchat-shell,
-#demo #webchat-container {
-  isolation: isolate;   /* create a new stacking context for the chat card */
-}
-
-/* Defensive: common overlay/backdrop classnames some builders add */
-.overlay,
-.backdrop,
-.modal-backdrop,
-[class*="overlay"],
-[class*="backdrop"] {
-  pointer-events: none !important;
-}
-
-/* Ensure the chat card is visible and sized */
-#webchat-shell{
-  display:flex; align-items:center; justify-content:center;
-  min-height:560px;
-}
-#webchat-container{
-  position:relative; width:100%; max-width:900px; height:560px;
-  background:#0b0d13; border-radius:16px; overflow:hidden;
-  box-shadow:0 18px 50px rgba(0,0,0,.35);
-}
-@media (max-width:1024px){ #webchat-container{ height:500px; max-width:820px; } }
-@media (max-width:640px){  #webchat-container{ height:520px; max-width:95%; } }
-#demo .demo-wrap::before,
-#demo .demo-wrap::after,
-#demo::before,
-#demo::after { content:none !important; display:none !important; }
-
-#webchat-container, #webchat-container * {
-  position: relative;
-  z-index: 2147483647 !important;
-  pointer-events: auto !important;
-}
-.bpWebchat, .bpWebchat * {
-  position: relative !important;
-  z-index: 2147483647 !important;
-}
+@media(max-width:1024px){#webchat-container{height:500px;max-width:820px}}
+@media(max-width:640px){#webchat-container{height:520px;max-width:95%}}
