@@ -90,8 +90,64 @@
 </section>
 
 <!-- Botpress scripts -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
-<script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js" defer></script>
+<!-- Botpress engine + your hosted config (order matters, no other Botpress scripts anywhere) -->
+<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js"></script>
+
+<!-- Hard-mount into #webchat-container + verbose logs -->
+<script>
+(function () {
+  console.log("[FlowBotAI] mount script starting");
+
+  function mount() {
+    const host = document.getElementById("webchat-container");
+    const wc = document.querySelector(".bpWebchat");
+    if (host && wc) {
+      if (wc.parentNode !== host) host.appendChild(wc);
+      Object.assign(wc.style, {
+        position: "absolute",
+        inset: "0",
+        width: "100%",
+        height: "100%",
+        maxHeight: "100%",
+        borderRadius: "16px",
+        zIndex: "2147483647"
+      });
+      const fab = document.querySelector(".bpFab");
+      if (fab) fab.style.display = "none";
+      if (window.botpress && window.botpress.open) window.botpress.open();
+      console.log("[FlowBotAI] bpWebchat mounted");
+      return true;
+    }
+    return false;
+  }
+
+  // 1) Try immediately
+  if (mount()) return;
+
+  // 2) Hook Botpress ready event if available
+  if (window.botpress && window.botpress.on) {
+    window.botpress.on("webchat:ready", () => {
+      console.log("[FlowBotAI] webchat:ready");
+      mount();
+    });
+  }
+
+  // 3) Poll as a fallback (up to ~10s)
+  let tries = 0;
+  const iv = setInterval(() => {
+    if (mount()) { clearInterval(iv); }
+    else if (++tries > 50) {
+      clearInterval(iv);
+      console.error("[FlowBotAI] Timed out mounting Botpress. Check Network for inject.js and 2546JD45.js.");
+      const host = document.getElementById("webchat-container");
+      if (host) {
+        host.innerHTML = '<div style="color:#fff;opacity:.8;padding:12px;text-align:center">Chat failed to load. Please refresh.</div>';
+      }
+    }
+  }, 200);
+})();
+</script>
 
 <style>
   #webchat-shell {
