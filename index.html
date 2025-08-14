@@ -35,7 +35,7 @@
         </div>
       </div>
     </section>
-    <!-- DEMO (robust inline embed – no external config) -->
+    <!-- DEMO (robust embed with spinner + automatic fallbacks) -->
 <section id="demo" class="section alt">
   <div class="container">
     <h2 class="center">See your assistant in action</h2>
@@ -43,16 +43,26 @@
 
     <div style="display:flex;justify-content:center;align-items:center;min-height:560px;">
       <div id="webchat-card" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
-        <!-- Bot mounts here -->
-        <div id="webchat" style="position:relative;width:100%;height:100%;"></div>
 
-        <!-- Botpress runtime (must be the ONLY one on the page) -->
+        <!-- Loading spinner / status -->
+        <div id="webchat-status" style="position:absolute;inset:0;display:grid;place-items:center;z-index:2;color:#aab3cf;font:600 15px/1.4 Inter,system-ui,Arial,sans-serif;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#6c83ff;animation:spin 1s linear infinite"></div>
+            <span>Loading assistant…</span>
+          </div>
+        </div>
+
+        <!-- Mount target (selector) -->
+        <div id="webchat" style="position:relative;width:100%;height:100%;z-index:1;"></div>
+
+        <!-- Botpress runtime (only one on the page) -->
         <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
         <script>
           (function () {
-            // IMPORTANT: Remove any other window.botpress.init on the page.
-            // Minimal config (removed additionalStylesheetUrl to avoid CSS render issues)
+            const status = document.getElementById('webchat-status');
+
+            // 1) Minimal inline config (no external CSS URL)
             const cfg = {
               botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
               clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
@@ -83,22 +93,57 @@
                 borderRadius: '16px',
                 zIndex: '10'
               });
+              // once the widget exists, hide the spinner
+              if (status) status.style.display = 'none';
               return true;
             }
 
-            window.botpress.init(cfg);
-            window.botpress.on('webchat:ready', () => {
-              pinIntoCard();
-              if (window.botpress.open) window.botpress.open();
-            });
+            // Try normal embed
+            try {
+              window.botpress.init(cfg);
+              window.botpress.on('webchat:ready', () => {
+                pinIntoCard();
+                if (window.botpress.open) window.botpress.open();
+              });
+              // If it renders a bit later or re-renders, keep pinning
+              new MutationObserver(() => pinIntoCard()).observe(document.documentElement, { childList: true, subtree: true });
+            } catch (e) {
+              console.error('Botpress init error:', e);
+            }
 
-            // Re-pin if Botpress re-renders
-            new MutationObserver(() => pinIntoCard()).observe(document.documentElement, { childList: true, subtree: true });
+            // 2) Fallback to iframe after 5s if widget never appears
+            setTimeout(() => {
+              if (!document.querySelector('.bpWebchat')) {
+                const host = document.getElementById('webchat');
+                if (host) {
+                  host.innerHTML =
+                    '<iframe src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://flowbotai.co.uk/bp-config.json" ' +
+                    'title="FlowBotAI Demo" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13" ' +
+                    'allow="clipboard-read; clipboard-write; microphone; camera"></iframe>';
+                  if (status) status.style.display = 'none';
+                }
+              }
+            }, 5000);
+
+            // 3) If even the iframe fails (origins/adblock), show a helpful message + link
+            setTimeout(() => {
+              const hasBP = document.querySelector('.bpWebchat') || document.querySelector('#webchat iframe');
+              if (!hasBP && status) {
+                status.innerHTML =
+                  '<div style="text-align:center;max-width:520px;padding:0 16px">' +
+                    '<div style="margin-bottom:10px">We couldn’t load the assistant here.</div>' +
+                    '<a href="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://flowbotai.co.uk/bp-config.json" ' +
+                    'style="display:inline-block;padding:10px 16px;border-radius:10px;background:#6c83ff;color:#0b0d13;font-weight:800;text-decoration:none" target="_blank" rel="noopener">' +
+                    'Open assistant in a new tab</a>' +
+                    '<div style="margin-top:10px;font-size:13px;opacity:.8">Tip: if it opens in a new tab, a content blocker on this browser is preventing the embed.</div>' +
+                  '</div>';
+              }
+            }, 9000);
           })();
         </script>
 
         <style>
-          /* Keep it inside the card; hide floating button */
+          /* Keep the bot inside the card; hide floating bubble */
           #webchat .bpWebchat {
             position: unset !important;
             width: 100% !important;
@@ -109,17 +154,18 @@
           }
           #webchat .bpFab { display: none !important; }
 
-          /* Kill common overlays/backdrops that could cover the chat */
+          /* Neutralize stray overlays/backdrops that could cover the chat */
           .bpBackdrop, .bpOverlay, .bpPortal, .bpModal, .bpDrawer { display:none !important; }
+          #demo::before, #demo::after { content:none !important; display:none !important; }
 
-          /* If some global overlay exists in your theme, neutralize it in this section */
-          #demo::before, #demo::after, #demo .demo-wrap::before, #demo .demo-wrap::after { content:none !important; display:none !important; }
+          /* spinner keyframes */
+          @keyframes spin { to { transform: rotate(360deg); } }
         </style>
+
       </div>
     </div>
   </div>
 </section>
-
 
     
     <!-- HOW IT WORKS -->
