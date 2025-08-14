@@ -57,54 +57,85 @@
     </section>
 
     
-    <!-- DEMO SECTION -->
+<!-- DEMO SECTION -->
 <section id="demo" class="section alt">
   <div class="container">
-    <h2 class="center">See your assistant in action</h2>
-    <p class="center muted">
+    <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
+    <p class="center muted" data-anim="fade-up" data-delay="80">
       Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
     </p>
 
-    <div id="webchat-shell" style="display:flex;justify-content:center;align-items:center;min-height:560px;">
-      <div id="webchat-container" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
-        
-        <!-- Botpress runtime -->
-        <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-        
-        <!-- Inline init -->
-        <script>
-          window.botpress.init({
-            "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-            "configuration": {
-              "version": "v1",
-              "botName": "FlowBot",
-              "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
-              "website": {},
-              "email": {
-                "title": "hello@flowbotai.co.uk",
-                "link": "hello@flowbotai.co.uk"
+    <div class="demo-wrap" data-anim="fade-up" data-delay="120">
+      <!-- Chatbot wrapper -->
+      <div id="webchat-shell" style="display:flex;justify-content:center;align-items:center;min-height:560px;">
+        <div id="webchat-container" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
+          
+          <!-- Botpress scripts -->
+          <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+          <script>
+            window.botpress.init({
+              "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+              "configuration": {
+                "version": "v1",
+                "botName": "FlowBot",
+                "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+                "color": "#3276EA",
+                "variant": "solid",
+                "headerVariant": "solid",
+                "themeMode": "dark",
+                "fontFamily": "inter",
+                "radius": 4,
+                "feedbackEnabled": false,
+                "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+                "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
               },
-              "phone": {},
-              "termsOfService": {},
-              "privacyPolicy": {},
-              "color": "#3276EA",
-              "variant": "solid",
-              "headerVariant": "solid",
-              "themeMode": "dark",
-              "fontFamily": "inter",
-              "radius": 4,
-              "feedbackEnabled": false,
-              "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-              "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
-            },
-            "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
-          });
+              "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
+            });
 
-          // Open chat automatically in embedded mode
-          if (window.botpress && window.botpress.on) {
-            window.botpress.on('webchat:ready', () => window.botpress.open());
-          }
-        </script>
+            window.botpress.on('webchat:ready', () => {
+              window.botpress.open();
+            });
+          </script>
+
+          <style>
+            /* Hide floating button */
+            .bpFab {
+              display: none !important;
+            }
+
+            /* Force chat to fill only the card */
+            .bpWebchat {
+              position: absolute !important;
+              top: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              bottom: 0 !important;
+              width: 100% !important;
+              height: 100% !important;
+              max-height: 100% !important;
+              border-radius: 16px !important;
+            }
+
+            /* Responsive sizing */
+            @media (max-width: 1024px) {
+              #webchat-container {
+                height: 500px;
+                max-width: 820px;
+              }
+            }
+            @media (max-width: 640px) {
+              #webchat-container {
+                height: 520px;
+                max-width: 95%;
+              }
+            }
+          </style>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <!-- Styles to fill container & hide floating bubble -->
         <style>
