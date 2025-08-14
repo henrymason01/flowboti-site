@@ -36,52 +36,97 @@
     </div>
   </section>
 
-  <!-- DEMO SECTION -->
-  <section id="demo" class="section alt">
-    <div class="container">
-      <h2 class="center">See Your Assistant in Action</h2>
-      <p class="center muted">Trained on your FAQs and brand voice, ready to handle conversations with care.</p>
+<!-- DEMO (Botpress embedded, not fullscreen) -->
+<section id="demo" class="section alt">
+  <div class="container">
+    <h2 class="center">See your assistant in action</h2>
+    <p class="center muted">Trained on your FAQs and brand voice. Ready to handle routine conversations with care.</p>
 
-      <div id="webchat-shell">
-        <div id="webchat-container">
-          <!-- Botpress Scripts -->
-          <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-          <script>
-            window.botpress.init({
-              botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-              clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-              configuration: {
-                version: "v1",
-                botName: "FlowBot",
-                themeMode: "dark",
-                variant: "solid",
-                color: "#3276EA",
-                fontFamily: "Inter",
-                radius: 4,
-                feedbackEnabled: false
-              }
-            });
+    <div id="webchat-shell" style="display:flex;justify-content:center;align-items:center;min-height:560px;">
+      <!-- Card that the chat will live inside -->
+      <div id="webchat-container" style="
+        position:relative;width:100%;max-width:900px;height:560px;
+        background:#0b0d13;border-radius:16px;overflow:hidden;
+        box-shadow:0 18px 50px rgba(0,0,0,.35);
+      ">
 
-            window.botpress.on('webchat:ready', () => {
-              const container = document.getElementById('webchat-container');
-              const wc = document.querySelector('.bpWebchat');
-              if (container && wc && wc.parentNode !== container) {
-                container.appendChild(wc);
-              }
-              if (wc) {
-                wc.style.position = 'absolute';
-                wc.style.inset = '0';
-                wc.style.width = '100%';
-                wc.style.height = '100%';
-                wc.style.borderRadius = '16px';
-              }
-              if (window.botpress.open) window.botpress.open();
-            });
-          </script>
-        </div>
+        <!-- 1) Botpress runtime -->
+        <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+
+        <!-- 2) Init + force mount into this card (prevents fullscreen) -->
+        <script>
+          // Your provided config
+          window.botpress.init({
+            "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+            "configuration": {
+              "version": "v1",
+              "botName": "FlowBot",
+              "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+              "website": {},
+              "email": { "title": "hello@flowbotai.co.uk", "link": "hello@flowbotai.co.uk" },
+              "phone": {},
+              "termsOfService": {},
+              "privacyPolicy": {},
+              "color": "#3276EA",
+              "variant": "solid",
+              "headerVariant": "solid",
+              "themeMode": "dark",
+              "fontFamily": "inter",
+              "radius": 4,
+              "feedbackEnabled": false,
+              "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+              "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
+            },
+            "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7"
+          });
+
+          // Keep the widget inside the card, not fullscreen
+          window.botpress.on('webchat:ready', () => {
+            const host = document.getElementById('webchat-container');
+            const wc = document.querySelector('.bpWebchat');
+
+            // Move the widget into our container (it defaults to <body>)
+            if (host && wc && wc.parentNode !== host) host.appendChild(wc);
+
+            // Make it fill only this card
+            if (wc) {
+              wc.style.position = 'absolute';
+              wc.style.inset = '0';
+              wc.style.width = '100%';
+              wc.style.height = '100%';
+              wc.style.maxHeight = '100%';
+              wc.style.borderRadius = '16px';
+            }
+
+            // Open inline
+            if (window.botpress.open) window.botpress.open();
+          });
+        </script>
+
+        <!-- 3) Minimal CSS override so .bpWebchat never goes fullscreen -->
+        <style>
+          .bpFab { display: none !important; } /* hide floating bubble */
+          .bpWebchat {
+            position: absolute !important;
+            top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+            width: 100% !important; height: 100% !important; max-height: 100% !important;
+            border-radius: 16px !important;
+          }
+
+          /* Optional: responsive card sizes */
+          @media (max-width: 1024px){
+            #webchat-container { height: 500px; max-width: 820px; }
+          }
+          @media (max-width: 640px){
+            #webchat-container { height: 520px; max-width: 95%; }
+          }
+        </style>
+
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- HOW IT WORKS -->
   <section class="section">
