@@ -237,3 +237,55 @@ body{
   width:100% !important; height:100% !important; max-height:100% !important;
   border-radius:16px !important; pointer-events:auto !important;
 }
+/* ——— Put chat above everything ——— */
+#webchat-container,
+#webchat-container * {
+  position: relative;
+  z-index: 2147483647 !important;   /* max stack */
+  pointer-events: auto !important;
+}
+
+.bpWebchat,
+.bpWebchat *,
+#webchat-container iframe {
+  position: relative !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+}
+
+/* ——— Kill any dark overlays in the demo section ——— */
+#demo .demo-wrap::before,
+#demo .demo-wrap::after,
+#demo::before,
+#demo::after {
+  content: none !important;
+  display: none !important;
+}
+
+#demo .demo-wrap,
+#demo #webchat-shell,
+#demo #webchat-container {
+  isolation: isolate;   /* create a new stacking context for the chat card */
+}
+
+/* Defensive: common overlay/backdrop classnames some builders add */
+.overlay,
+.backdrop,
+.modal-backdrop,
+[class*="overlay"],
+[class*="backdrop"] {
+  pointer-events: none !important;
+}
+
+/* Ensure the chat card is visible and sized */
+#webchat-shell{
+  display:flex; align-items:center; justify-content:center;
+  min-height:560px;
+}
+#webchat-container{
+  position:relative; width:100%; max-width:900px; height:560px;
+  background:#0b0d13; border-radius:16px; overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+}
+@media (max-width:1024px){ #webchat-container{ height:500px; max-width:820px; } }
+@media (max-width:640px){  #webchat-container{ height:520px; max-width:95%; } }
