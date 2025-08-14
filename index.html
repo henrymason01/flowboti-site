@@ -36,25 +36,76 @@
       </div>
     </section>
 
-    <!-- DEMO (embedded via iframe with local config) -->
-   <!-- DEMO (shareable iframe using your local config) -->
+    <!-- DEMO (Botpress embed in fixed-size card) -->
 <section id="demo" class="section alt">
   <div class="container">
     <h2 class="center">See your assistant in action</h2>
     <p class="center muted">Trained on your FAQs and brand voice. Ready to handle routine conversations with care.</p>
 
-    <div id="webchat-shell" style="display:flex;justify-content:center;align-items:center;min-height:560px;">
-      <div id="webchat-container" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
-        <iframe
-          src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=/bp-config.json"
-          title="FlowBotAI Demo"
-          style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
-          allow="clipboard-read; clipboard-write; microphone; camera">
-        </iframe>
+    <div style="display:flex;justify-content:center;align-items:center;min-height:560px;">
+      <div style="
+        position:relative;
+        width:100%;
+        max-width:900px;
+        height:560px;
+        background:#0b0d13;
+        border-radius:16px;
+        overflow:hidden;
+        box-shadow:0 18px 50px rgba(0,0,0,.35);
+      ">
+
+        <!-- Webchat container -->
+        <div id="webchat" style="width:100%; height:100%;"></div>
+
+        <!-- Botpress webchat script -->
+        <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+        <style>
+          #webchat .bpWebchat {
+            position: unset;
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+            max-width: 100%;
+            border-radius: 16px;
+          }
+          #webchat .bpFab {
+            display: none;
+          }
+        </style>
+        <script>
+          window.botpress.on("webchat:ready", () => {
+            window.botpress.open();
+          });
+          window.botpress.init({
+            "botId": "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+            "configuration": {
+              "version": "v1",
+              "botName": "FlowBot",
+              "botDescription": "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+              "website": {},
+              "email": { "title": "hello@flowbotai.co.uk", "link": "hello@flowbotai.co.uk" },
+              "phone": {},
+              "termsOfService": {},
+              "privacyPolicy": {},
+              "color": "#3276EA",
+              "variant": "solid",
+              "headerVariant": "solid",
+              "themeMode": "dark",
+              "fontFamily": "inter",
+              "radius": 4,
+              "feedbackEnabled": false,
+              "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+              "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/08/12/16/20250812161624-T0IGVAY9.css"
+            },
+            "clientId": "4ddde79d-08f5-4846-be15-1303066f19a7",
+            "selector": "#webchat"
+          });
+        </script>
       </div>
     </div>
   </div>
 </section>
+
 
 
     <!-- HOW IT WORKS -->
