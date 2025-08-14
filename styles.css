@@ -177,3 +177,24 @@ body{
 
 /* Keep the chat visually above demo backgrounds without touching the whole page */
 #webchat-container{ z-index: 10; }
+/* Kill fullscreen / fixed overlay and floating button */
+.bpFab { display: none !important; }
+.bpWebchat {
+  position: absolute !important;   /* override Botpress fixed */
+  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  width: 100% !important; height: 100% !important; max-height: 100% !important;
+  border-radius: 16px !important;
+  z-index: 1 !important;
+}
+/* Some themes add a dark backdrop—neutralise it */
+.bpBackdrop, .bpOverlay, .bpPortal, .bpModal, .bpDrawer { display: none !important; }
+
+/* Your card sizing (adjust height if you want smaller/taller) */
+#webchat-shell{ display:flex; justify-content:center; align-items:center; min-height:560px; }
+#webchat-container{
+  position:relative; width:100%; max-width:900px; height:560px;
+  background:#0b0d13; border-radius:16px; overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+}
+@media (max-width:1024px){ #webchat-container{ height:500px; max-width:820px; } }
+@media (max-width:640px){  #webchat-container{ height:520px; max-width:95%; } }
