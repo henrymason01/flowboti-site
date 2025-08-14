@@ -72,7 +72,8 @@
     </section>
 
     <!-- DEMO SECTION (centered embedded chatbot via iframe) -->
-  <section id="demo" class="section alt">
+  <!-- DEMO SECTION (centered embedded chatbot via scripts) -->
+<section id="demo" class="section alt">
   <div class="container">
     <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
     <p class="center muted" data-anim="fade-up" data-delay="80">
@@ -108,6 +109,7 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    z-index: 2147483647 !important;
   }
   @media (max-width: 1024px) {
     #webchat-container {
@@ -121,7 +123,59 @@
       max-width: 95%;
     }
   }
+  /* Ensure chatbot is above everything */
+  #webchat-container,
+  #webchat-container * {
+    position: relative;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+  .bpWebchat,
+  .bpWebchat *,
+  #webchat-container iframe {
+    position: relative !important;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+  /* Remove overlays */
+  #demo .demo-wrap::before,
+  #demo .demo-wrap::after,
+  #demo::before,
+  #demo::after {
+    content: none !important;
+    display: none !important;
+  }
 </style>
+
+<script>
+(function waitForBP(){
+  if (!window.botpress || !window.botpress.on) return setTimeout(waitForBP, 150);
+  window.botpress.on('webchat:ready', () => {
+    // Hide floating icon
+    const fab = document.querySelector('.bpFab');
+    if (fab) fab.style.display = 'none';
+
+    // Move chat into our container
+    const host = document.getElementById('webchat-container');
+    const wc = document.querySelector('.bpWebchat');
+    if (host && wc && wc.parentNode !== host) host.appendChild(wc);
+
+    // Style to fit container
+    if (wc) {
+      wc.style.position = 'absolute';
+      wc.style.inset = '0';
+      wc.style.width = '100%';
+      wc.style.height = '100%';
+      wc.style.borderRadius = '16px';
+      wc.style.zIndex = '2147483647';
+    }
+
+    // Auto-open chat
+    if (window.botpress && window.botpress.open) window.botpress.open();
+  });
+})();
+</script>
+
 
   
 
