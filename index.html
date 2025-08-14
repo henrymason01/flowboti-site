@@ -10,39 +10,26 @@
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
 
-  <!-- Inline safety styles so the demo looks right even if styles.css is cached -->
+  <!-- Safety styles so the demo works even if styles.css caches -->
   <style>
-    /* Keep hero compact (no background video) */
-    .hero, .hero-video { min-height: auto !important; padding-bottom: 2rem !important; }
+    :root { --card-bg:#0b0d13; }
+    .hero, .hero-video { min-height:auto !important; padding-bottom:2rem !important; }
+    #demo h2{ margin-bottom:.5rem; } #demo .muted{ margin-top:0; margin-bottom:1rem; }
 
-    /* Demo section spacing */
-    #demo h2 { margin-bottom: .5rem; }
-    #demo .muted { margin-top: 0; margin-bottom: 1rem; }
-
-    /* Centered, embedded chatbot card */
-    #webchat-shell{
-      display:flex; align-items:center; justify-content:center;
-      width:100%; margin:0 auto; min-height:560px;
-    }
+    /* Centered, embedded chatbot “card” */
+    #webchat-shell{ display:flex; align-items:center; justify-content:center; min-height:560px; }
     #webchat-container{
       position:relative; width:100%; max-width:900px; height:560px;
-      background:#0b0d13; border-radius:16px; overflow:hidden;
-      box-shadow:0 18px 50px rgba(0,0,0,.35);
+      margin:0 auto; background:var(--card-bg); border-radius:16px;
+      overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.35);
     }
-    /* Make the iframe fill the card */
-    #webchat-container iframe{
-      position:absolute; inset:0; width:100%; height:100%;
-      border:0; border-radius:16px; background:#0b0d13;
-    }
+    @media (max-width:1024px){ #webchat-container{ height:500px; max-width:820px; } }
+    @media (max-width:640px){  #webchat-shell{ min-height:520px; } #webchat-container{ height:520px; max-width:95%; } }
 
-    /* Responsive heights */
-    @media (max-width:1024px){
-      #webchat-container{ height:500px; max-width:820px; }
-    }
-    @media (max-width:640px){
-      #webchat-shell{ min-height:520px; }
-      #webchat-container{ height:520px; max-width:95%; }
-    }
+    /* Put chat ABOVE everything + kill any overlays in demo */
+    #webchat-container, #webchat-container *{ position:relative; z-index:2147483647 !important; pointer-events:auto !important; }
+    .bpWebchat, .bpWebchat *{ position:relative !important; z-index:2147483647 !important; pointer-events:auto !important; }
+    #demo .demo-wrap::before, #demo .demo-wrap::after, #demo::before, #demo::after{ content:none !important; display:none !important; }
   </style>
 </head>
 <body>
@@ -60,9 +47,7 @@
       <div class="container hero-inner">
         <div class="hero-copy" data-anim="fade-up">
           <h1>Your website’s 24/7 sales teammate</h1>
-          <p class="sub">
-            Capture more enquiries while you sleep. A branded AI assistant that answers questions, books calls, and qualifies leads.
-          </p>
+          <p class="sub">Capture more enquiries while you sleep. A branded AI assistant that answers questions, books calls, and qualifies leads.</p>
           <div class="cta-row">
             <a href="#demo" class="btn btn-lg btn-primary" data-goal="hero-see-demo">See it in action</a>
             <a href="#contact" class="btn btn-lg btn-secondary" data-goal="hero-get-demo">Contact us</a>
@@ -71,212 +56,49 @@
       </div>
     </section>
 
-    <!-- DEMO SECTION (centered embedded chatbot via iframe) -->
-  <!-- DEMO SECTION (centered embedded chatbot via scripts) -->
-<section id="demo" class="section alt">
-  <div class="container">
-    <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
-    <p class="center muted" data-anim="fade-up" data-delay="80">
-      Trained on your FAQs and brand voice. Ready to handle routine conversations with care.
-    </p>
-
-    <div class="demo-wrap" data-anim="fade-up" data-delay="120">
-      <!-- Centered chatbot container -->
-      <div id="webchat-shell">
-        <div id="webchat-container"></div>
+    <!-- DEMO SECTION -->
+    <section id="demo" class="section alt">
+      <div class="container">
+        <h2 class="center" data-anim="fade-up">See your assistant in action</h2>
+        <p class="center muted" data-anim="fade-up" data-delay="80">Trained on your FAQs and brand voice. Ready to handle routine conversations with care.</p>
+        <div class="demo-wrap" data-anim="fade-up" data-delay="120">
+          <div id="webchat-shell">
+            <div id="webchat-container">
+              <!-- A friendly loader / error space -->
+              <div id="bp-placeholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;opacity:.7;font:500 15px/1.4 Inter,system-ui,Arial,sans-serif;">
+                Loading chat…
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Botpress scripts -->
-<!-- Botpress engine + your hosted config (order matters, no other Botpress scripts anywhere) -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js"></script>
-
-<!-- Hard-mount into #webchat-container + verbose logs -->
-<script>
-(function () {
-  console.log("[FlowBotAI] mount script starting");
-
-  function mount() {
-    const host = document.getElementById("webchat-container");
-    const wc = document.querySelector(".bpWebchat");
-    if (host && wc) {
-      if (wc.parentNode !== host) host.appendChild(wc);
-      Object.assign(wc.style, {
-        position: "absolute",
-        inset: "0",
-        width: "100%",
-        height: "100%",
-        maxHeight: "100%",
-        borderRadius: "16px",
-        zIndex: "2147483647"
-      });
-      const fab = document.querySelector(".bpFab");
-      if (fab) fab.style.display = "none";
-      if (window.botpress && window.botpress.open) window.botpress.open();
-      console.log("[FlowBotAI] bpWebchat mounted");
-      return true;
-    }
-    return false;
-  }
-
-  // 1) Try immediately
-  if (mount()) return;
-
-  // 2) Hook Botpress ready event if available
-  if (window.botpress && window.botpress.on) {
-    window.botpress.on("webchat:ready", () => {
-      console.log("[FlowBotAI] webchat:ready");
-      mount();
-    });
-  }
-
-  // 3) Poll as a fallback (up to ~10s)
-  let tries = 0;
-  const iv = setInterval(() => {
-    if (mount()) { clearInterval(iv); }
-    else if (++tries > 50) {
-      clearInterval(iv);
-      console.error("[FlowBotAI] Timed out mounting Botpress. Check Network for inject.js and 2546JD45.js.");
-      const host = document.getElementById("webchat-container");
-      if (host) {
-        host.innerHTML = '<div style="color:#fff;opacity:.8;padding:12px;text-align:center">Chat failed to load. Please refresh.</div>';
-      }
-    }
-  }, 200);
-})();
-</script>
-
-<style>
-  #webchat-shell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 560px;
-  }
-  #webchat-container {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 560px;
-    background: #0b0d13;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 18px 50px rgba(0,0,0,.35);
-    z-index: 2147483647 !important;
-  }
-  @media (max-width: 1024px) {
-    #webchat-container {
-      height: 500px;
-      max-width: 820px;
-    }
-  }
-  @media (max-width: 640px) {
-    #webchat-container {
-      height: 520px;
-      max-width: 95%;
-    }
-  }
-  /* Ensure chatbot is above everything */
-  #webchat-container,
-  #webchat-container * {
-    position: relative;
-    z-index: 2147483647 !important;
-    pointer-events: auto !important;
-  }
-  .bpWebchat,
-  .bpWebchat *,
-  #webchat-container iframe {
-    position: relative !important;
-    z-index: 2147483647 !important;
-    pointer-events: auto !important;
-  }
-  /* Remove overlays */
-  #demo .demo-wrap::before,
-  #demo .demo-wrap::after,
-  #demo::before,
-  #demo::after {
-    content: none !important;
-    display: none !important;
-  }
-</style>
-
-<script>
-(function waitForBP(){
-  if (!window.botpress || !window.botpress.on) return setTimeout(waitForBP, 150);
-  window.botpress.on('webchat:ready', () => {
-    // Hide floating icon
-    const fab = document.querySelector('.bpFab');
-    if (fab) fab.style.display = 'none';
-
-    // Move chat into our container
-    const host = document.getElementById('webchat-container');
-    const wc = document.querySelector('.bpWebchat');
-    if (host && wc && wc.parentNode !== host) host.appendChild(wc);
-
-    // Style to fit container
-    if (wc) {
-      wc.style.position = 'absolute';
-      wc.style.inset = '0';
-      wc.style.width = '100%';
-      wc.style.height = '100%';
-      wc.style.borderRadius = '16px';
-      wc.style.zIndex = '2147483647';
-    }
-
-    // Auto-open chat
-    if (window.botpress && window.botpress.open) window.botpress.open();
-  });
-})();
-</script>
-
-
-  
-
-
-
+    <!-- HOW IT WORKS -->
     <section class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">How it works</h2>
         <div class="grid-3">
-          <article class="tile" data-anim="slide-up">
-            <h3>1) Drop in the snippet</h3>
-            <p>One line added to your site. No rebuild needed.</p>
-          </article>
-          <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>2) Train on your content</h3>
-            <p>We learn from your site, docs, and past chats to match your tone.</p>
-          </article>
-          <article class="tile" data-anim="slide-up" data-delay="120">
-            <h3>3) Go live and track leads</h3>
-            <p>See conversations, booked calls, and qualified enquiries in one place.</p>
-          </article>
+          <article class="tile" data-anim="slide-up"><h3>1) Drop in the snippet</h3><p>One line added to your site. No rebuild needed.</p></article>
+          <article class="tile" data-anim="slide-up" data-delay="60"><h3>2) Train on your content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
+          <article class="tile" data-anim="slide-up" data-delay="120"><h3>3) Go live and track leads</h3><p>See conversations, booked calls, and qualified enquiries in one place.</p></article>
         </div>
       </div>
     </section>
 
+    <!-- BENEFITS -->
     <section class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">Why businesses choose FlowBotAI</h2>
         <div class="grid-3">
-          <article class="tile" data-anim="slide-up">
-            <h3>Strong first impressions</h3>
-            <p>Every visitor gets a clear, friendly welcome and fast answers.</p>
-          </article>
-          <article class="tile" data-anim="slide-up" data-delay="60">
-            <h3>Consistency and reliability</h3>
-            <p>Always on. Always accurate on routine questions.</p>
-          </article>
-          <article class="tile" data-anim="slide-up" data-delay="120">
-            <h3>Growth without stress</h3>
-            <p>Scale conversations while your team focuses on high value work.</p>
-          </article>
+          <article class="tile" data-anim="slide-up"><h3>Strong first impressions</h3><p>Every visitor gets a clear, friendly welcome and fast answers.</p></article>
+          <article class="tile" data-anim="slide-up" data-delay="60"><h3>Consistency and reliability</h3><p>Always on. Always accurate on routine questions.</p></article>
+          <article class="tile" data-anim="slide-up" data-delay="120"><h3>Growth without stress</h3><p>Scale conversations while your team focuses on high value work.</p></article>
         </div>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center" data-anim="fade-up">Contact us</h2>
@@ -284,37 +106,15 @@
 
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate data-anim="fade-up" data-delay="100" data-formspree>
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
-
-          <label class="field">
-            <span class="label">Full name</span>
-            <input type="text" name="full_name" required autocomplete="name" inputmode="text"/>
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">Business website</span>
-            <input type="url" name="website" placeholder="https://example.com" required/>
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">Work email</span>
-            <input type="email" name="_replyto" required autocomplete="email" inputmode="email"/>
-            <span class="error"></span>
-          </label>
-
-          <label class="field">
-            <span class="label">What should the assistant do?</span>
-            <textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, integrations to connect, booking link, and success measure."></textarea>
-            <span class="error"></span>
-          </label>
-
+          <label class="field"><span class="label">Full name</span><input type="text" name="full_name" required autocomplete="name"/></label>
+          <label class="field"><span class="label">Business website</span><input type="url" name="website" placeholder="https://example.com" required/></label>
+          <label class="field"><span class="label">Work email</span><input type="email" name="_replyto" required autocomplete="email"/></label>
+          <label class="field"><span class="label">What should the assistant do?</span><textarea name="requirements" rows="6" required placeholder="Describe key tasks, tone, integrations to connect, booking link, and success measure."></textarea></label>
           <input type="hidden" name="source" value="flowbotai.co.uk"/>
           <div class="cta-row form-ctas">
             <button type="submit" class="btn btn-full btn-lg btn-primary" data-goal="form-submit">Send</button>
             <a href="#main" class="btn btn-lg btn-secondary">Back to top</a>
           </div>
-
           <p class="contact-email-small center">Or email <a href="mailto:hello@flowbotai.co.uk">hello@flowbotai.co.uk</a></p>
           <p id="form-status" class="status" role="status" aria-live="polite"></p>
         </form>
@@ -328,41 +128,90 @@
     </div>
   </footer>
 
-  <!-- Important: NO Botpress JS here. The iframe above is all we need. -->
+  <!-- Botpress engine + YOUR hosted config (order matters) -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js"></script>
+
+  <!-- Self-healing mount + helpful errors -->
+  <script>
+    (function () {
+      const LOG = (...a)=>console.log("[FlowBotAI]",...a);
+      const ERR = (...a)=>console.error("[FlowBotAI]",...a);
+
+      // Ensure our container exists even if markup changed
+      function ensureContainer() {
+        let host = document.getElementById("webchat-container");
+        if (host) return host;
+        const wrap = document.querySelector("#demo .demo-wrap") || document.body;
+        host = document.createElement("div");
+        host.id = "webchat-container";
+        Object.assign(host.style, {
+          position:"relative", width:"100%", maxWidth:"900px", height:"560px",
+          margin:"40px auto", background:"#0b0d13", borderRadius:"16px",
+          overflow:"hidden", boxShadow:"0 18px 50px rgba(0,0,0,.35)"
+        });
+        wrap.appendChild(host);
+        LOG("Created fallback #webchat-container");
+        return host;
+      }
+
+      function showStatus(msg){
+        const p = document.getElementById("bp-placeholder");
+        if (p) p.textContent = msg;
+      }
+
+      function mount() {
+        const host = ensureContainer();
+        const wc = document.querySelector(".bpWebchat");
+        if (!wc) return false;
+
+        if (wc.parentNode !== host) host.appendChild(wc);
+        Object.assign(wc.style, {
+          position:"absolute", inset:"0", width:"100%", height:"100%",
+          maxHeight:"100%", borderRadius:"16px", zIndex:"2147483647"
+        });
+
+        const fab = document.querySelector(".bpFab");
+        if (fab) fab.style.display = "none";
+
+        if (window.botpress && window.botpress.open) window.botpress.open();
+        showStatus(""); // clear placeholder
+        LOG("Mounted bpWebchat into #webchat-container");
+        return true;
+      }
+
+      function start() {
+        // If Botpress not ready yet, retry shortly
+        if (!window.botpress || !window.botpress.on) {
+          return setTimeout(start, 150);
+        }
+        window.botpress.on("webchat:ready", () => {
+          LOG("webchat:ready");
+          mount();
+        });
+
+        // Fallback polling in case the event misses
+        let tries = 0;
+        const iv = setInterval(() => {
+          if (mount()) { clearInterval(iv); }
+          else if (++tries > 60) {
+            clearInterval(iv);
+            ERR("Timed out mounting. Check that both external scripts loaded (inject.js + your bpcontent .js).");
+            showStatus("Chat failed to load. Try disabling extensions and refresh.");
+          }
+        }, 200);
+      }
+
+      // Kick off after DOM ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+      } else {
+        start();
+      }
+    })();
+  </script>
+
+  <!-- Your site JS (keep this) -->
   <script src="/script.js" defer></script>
-  <!-- Botpress engine + your hosted config -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js"></script>
-
-<!-- Mount the widget into the centered container and open it -->
-<script>
-  window.botpress.on('webchat:ready', () => {
-    // Hide floating bubble
-    const fab = document.querySelector('.bpFab');
-    if (fab) fab.style.display = 'none';
-
-    // Move chat into our demo container
-    const container = document.getElementById('webchat-container');
-    const webchat = document.querySelector('.bpWebchat');
-    if (container && webchat && webchat.parentNode !== container) {
-      container.appendChild(webchat);
-    }
-
-    // Make it fill the centered card
-    if (webchat) {
-      webchat.style.position = 'absolute';
-      webchat.style.inset = '0';
-      webchat.style.width = '100%';
-      webchat.style.height = '100%';
-      webchat.style.maxHeight = '100%';
-      webchat.style.borderRadius = '16px';
-      webchat.style.zIndex = '1';
-    }
-
-    // Open by default (optional)
-    if (window.botpress && window.botpress.open) window.botpress.open();
-  });
-</script>
-
 </body>
 </html>
