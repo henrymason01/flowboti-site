@@ -9,6 +9,28 @@
   <link rel="apple-touch-icon" href="/logo.png"/>
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
+
+  <!-- Botpress runtime (per docs) -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+
+  <!-- Keep the webchat inside our card (not fullscreen) -->
+  <style>
+    /* The container we mount into */
+    #webchat {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    /* Make the widget fill ONLY the #webchat box */
+    #webchat .bpWebchat {
+      position: absolute !important;
+      top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+      width: 100% !important; height: 100% !important; max-height: 100% !important;
+      border-radius: 16px !important;
+    }
+    /* Hide floating bubble */
+    #webchat .bpFab { display: none !important; }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -36,7 +58,7 @@
       </div>
     </section>
 
-    <!-- DEMO (single iframe only) -->
+    <!-- DEMO (official JS embed pinned inside a card) -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">See your assistant in action</h2>
@@ -47,13 +69,8 @@
                style="position:relative;width:100%;max-width:900px;height:560px;
                       background:#0b0d13;border-radius:16px;overflow:hidden;
                       box-shadow:0 18px 50px rgba(0,0,0,.35);">
-            <iframe
-              src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/10/00/20250810004526-MT792BNT.json"
-              title="FlowBotAI Demo"
-              style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
-              allow="clipboard-read; clipboard-write; microphone; camera; autoplay; fullscreen"
-              loading="eager"
-            ></iframe>
+            <!-- Mount target (required BEFORE init) -->
+            <div id="webchat"></div>
           </div>
         </div>
       </div>
@@ -99,12 +116,37 @@
     </div>
   </footer>
 
+  <!-- Init Botpress (per docs) -->
+  <script>
+    window.botpress.on('webchat:ready', () => {
+      window.botpress.open(); // open immediately
+    });
+
+    window.botpress.init({
+      botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+      clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+      selector: "#webchat",
+      configuration: {
+        version: "v1",
+        botName: "FlowBot",
+        botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+        color: "#3276EA",
+        variant: "solid",
+        headerVariant: "solid",
+        themeMode: "dark",
+        fontFamily: "inter",
+        radius: 4,
+        feedbackEnabled: false,
+        footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+      }
+    });
+  </script>
+
+  <!-- Minor site JS + custom overrides -->
   <script>
     // footer year
     const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
   </script>
-
-  <!-- Custom overrides -->
   <style>
     /* Make "Or email ..." bigger + white */
     .contact-email-small {
@@ -119,9 +161,7 @@
     }
 
     /* Smooth scrolling like Apple */
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
   </style>
 </body>
 </html>
