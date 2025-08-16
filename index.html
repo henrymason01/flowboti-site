@@ -212,5 +212,25 @@
     // footer year
     const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
   </script>
+
+  <!-- Custom overrides -->
+  <style>
+    /* Make "Or email ..." bigger + white */
+    .contact-email-small {
+      font-size: 20px;
+      color: #ffffff;
+      margin-top: 20px;
+    }
+    .contact-email-small a {
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* Smooth scrolling like Apple */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </body>
 </html>
