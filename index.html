@@ -54,17 +54,19 @@
             </div>
 
             <!-- Mount target (selector) -->
-            <div id="webchat" style="position:relative;width:100%;height:100%;z-index:1;">
-              <!-- NEW: Always-on iframe fallback (works on every browser/device) -->
-              <iframe
-  src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/10/00/20250810004526-MT792BNT.json"
-  title="FlowBotAI Demo"
-  style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
-  allow="clipboard-read; clipboard-write; microphone; camera; autoplay; fullscreen"
-  loading="eager"
-></iframe>
+            <div id="webchat-card" style="position:relative;width:100%;max-width:900px;height:560px;background:#0b0d13;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.35);">
+  <!-- Single, reliable iframe embed (no JS, no spinner) -->
+  <div id="webchat" style="position:relative;width:100%;height:100%;">
+    <iframe
+      src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/10/00/20250810004526-MT792BNT.json"
+      title="FlowBotAI Demo"
+      style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
+      allow="clipboard-read; clipboard-write; microphone; camera; autoplay; fullscreen"
+      loading="eager"
+    ></iframe>
+  </div>
+</div>
 
-            </div>
 
             <!-- Botpress runtime (only one on the page) -->
             <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
