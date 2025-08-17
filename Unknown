@@ -1,0 +1,27 @@
+<!-- FlowBotAI logo - SVG, transparent background -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="FlowBotAI logo">
+  <!-- Tweak brand colors with CSS variables if you like -->
+  <defs>
+    <style>
+      :root { --outer:#3276EA; --inner:#4FD5E5; --eye:#0b0d13; }
+    </style>
+  </defs>
+
+  <!-- Antenna + bubble (outer) -->
+  <g fill="var(--outer)">
+    <!-- antenna -->
+    <circle cx="128" cy="16" r="12"></circle>
+    <rect x="120" y="24" width="16" height="24" rx="8"></rect>
+    <!-- speech bubble body -->
+    <rect x="28" y="48" width="200" height="160" rx="48"></rect>
+    <!-- bubble tail -->
+    <path d="M92 208 L60 240 L60 208 Z"></path>
+  </g>
+
+  <!-- Face (inner panel) -->
+  <rect x="56" y="80" width="144" height="96" rx="28" fill="var(--inner)"></rect>
+
+  <!-- Eyes -->
+  <circle cx="104" cy="128" r="12" fill="var(--eye)"></circle>
+  <circle cx="152" cy="128" r="12" fill="var(--eye)"></circle>
+</svg>
