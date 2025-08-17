@@ -18,6 +18,63 @@
     .contact-email-small { font-size: 20px; color: #fff; margin-top: 20px; }
     .contact-email-small a { color: #fff; font-weight: 600; text-decoration: underline; }
     html { scroll-behavior: smooth; }
+
+    /* Demo pointer styles */
+    :root{
+      /* Fine tune these two numbers to perfectly hit the bubble on your layout */
+      --bubble-right: 28px;  /* distance of bubble from the right edge */
+      --bubble-bottom: 28px; /* distance of bubble from the bottom edge */
+    }
+    .demo-pointer {
+      position: fixed;
+      right: calc(var(--bubble-right) + 64px); /* place the callout left of the bubble */
+      bottom: calc(var(--bubble-bottom) + 96px); /* place the callout above the bubble */
+      z-index: 2147483000;
+      pointer-events: none;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: #bcd7ff;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+    .pointer-wrap{
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .pointer-text{
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(100, 116, 139, 0.35);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      line-height: 1.3;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+    }
+    /* Curved SVG arrow whose tip is exactly at the bottom right of the SVG */
+    .pointer-arrow{
+      width: 120px;
+      height: 120px;
+      display: block;
+      transform: rotate(0deg);
+      animation: nod 2.2s ease-in-out infinite;
+      color: #7fb2ff;
+    }
+    @keyframes nod {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-4px); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .pointer-arrow{ animation: none; }
+    }
+    @media (max-width: 640px){
+      .demo-pointer{
+        right: calc(var(--bubble-right) + 48px);
+        bottom: calc(var(--bubble-bottom) + 84px);
+      }
+      .pointer-arrow{ width: 96px; height: 96px; }
+      .pointer-text{ font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -39,78 +96,34 @@
           <h1>Your Website’s 24/7 Sales Teammate</h1>
           <p class="sub">Capture more enquiries while you sleep. A branded AI assistant that answers questions, books calls, and qualifies leads.</p>
           <div class="cta-row">
-            <a href="#demo" class="btn btn-lg btn-primary">See it in Action</a>
+            <!-- This button now opens the chat -->
+            <a href="#demo" id="open-chat" class="btn btn-lg btn-primary">See it in Action</a>
             <a href="#contact" class="btn btn-lg btn-secondary">Contact Us</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- DEMO (new arrow design) -->
+    <!-- DEMO -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">See your assistant in action</h2>
         <p class="center muted">This is how it appears on your site. Click the chat bubble in the bottom right.</p>
       </div>
 
-      <!-- Pointer arrow UI -->
+      <!-- Pointer that aims at the bubble. Adjust --bubble-right and --bubble-bottom if needed -->
       <div class="demo-pointer" aria-hidden="true">
-        <div class="pointer-badge">
-          <span class="pointer-text">
-            This is what it looks like on your website. Try me
-          </span>
-          <div class="curved-arrow"></div>
+        <div class="pointer-wrap">
+          <span class="pointer-text">This is what it looks like on your website. Try me</span>
+          <!-- The arrow path ends at the bottom right corner of this SVG, which we position toward the bubble -->
+          <svg class="pointer-arrow" viewBox="0 0 120 120" role="presentation" aria-hidden="true">
+            <!-- Curved stroke -->
+            <path d="M10,20 C10,80 70,70 95,95" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+            <!-- Arrow head that points to the exact tip near the bubble -->
+            <path d="M95,95 l-14,-6 l8,16" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
-
-      <style>
-        .demo-pointer {
-          position: fixed;
-          right: 30px;
-          bottom: 140px;
-          z-index: 2147483000;
-          pointer-events: none;
-          font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-        }
-        .pointer-badge {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          color: #bcd7ff;
-          text-align: center;
-        }
-        .pointer-text {
-          background: rgba(15, 23, 42, 0.9);
-          border: 1px solid rgba(100, 116, 139, 0.35);
-          border-radius: 12px;
-          padding: 10px 14px;
-          font-size: 14px;
-          line-height: 1.3;
-          backdrop-filter: blur(4px);
-          max-width: 200px;
-        }
-        .curved-arrow {
-          width: 50px;
-          height: 50px;
-          border: solid #7fb2ff;
-          border-width: 0 6px 6px 0;
-          display: inline-block;
-          transform: rotate(45deg);
-          animation: bounce 1.5s infinite;
-        }
-        @keyframes bounce {
-          0%, 100% { transform: rotate(45deg) translateY(0); }
-          50%      { transform: rotate(45deg) translateY(-8px); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .curved-arrow { animation: none; }
-        }
-        @media (max-width: 640px) {
-          .demo-pointer { right: 20px; bottom: 120px; }
-          .pointer-text { font-size: 13px; }
-        }
-      </style>
     </section>
 
     <!-- HOW IT WORKS -->
@@ -154,8 +167,23 @@
   </footer>
 
   <script>
+    // Footer year
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
+
+    // Open chat when the CTA is clicked
+    const btn = document.getElementById('open-chat');
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (window.botpress && typeof window.botpress.open === 'function') {
+          window.botpress.open();
+        }
+        // Scroll to bottom right so the bubble is in view on small screens
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
+    }
   </script>
 </body>
 </html>
+
