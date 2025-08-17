@@ -106,36 +106,89 @@
     </section>
 
     <!-- DEMO -->
-    <section id="demo" class="section alt">
-      <div class="container">
-        <h2 class="center">See your assistant in action</h2>
-        <p class="center muted">This is how it appears on your site. Click the chat bubble in the bottom right.</p>
-      </div>
+<section id="demo" class="section alt">
+  <div class="container">
+    <h2 class="center">See your assistant in action</h2>
+    <p class="center muted">This is how it appears on your site. Click the chat bubble in the bottom right.</p>
+  </div>
 
-      <!-- Curved arrow that points to the bubble -->
-      <div class="demo-pointer" aria-hidden="true">
-        <div class="pointer-wrap">
-          <span class="pointer-text">This is what it looks like on your website. Try me</span>
-          <!-- Arrow path ends at the bottom right to act as the tip -->
-          <svg class="pointer-arrow" viewBox="0 0 160 160" role="presentation" aria-hidden="true">
-            <!-- curve -->
-            <path d="M15,25 C15,110 100,105 128,132" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
-            <!-- arrowhead -->
-            <path d="M128,132 L108,124 M128,132 L120,112" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-    </section>
+  <!-- Callout + Arrow -->
+  <div class="demo-pointer" aria-hidden="true">
+    <div class="pointer-wrap">
+      <span class="pointer-text">This is what it looks like on your website. Try me</span>
+
+      <!-- Clear curved arrow with a solid triangular head.
+           The tip is the bottom-right corner of the SVG. -->
+      <svg class="pointer-arrow" viewBox="0 0 180 180" role="presentation" aria-hidden="true">
+        <!-- curve -->
+        <path d="M20,40 C20,130 110,120 140,150" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+        <!-- triangular arrowhead pointing to the tip -->
+        <polygon points="140,150 120,140 128,160" fill="currentColor"/>
+      </svg>
+    </div>
+  </div>
+
+  <style>
+    :root{
+      /* Nudge these four to aim the arrow perfectly at your bubble */
+      --bubble-right: 28px;
+      --bubble-bottom: 28px;
+      --arrow-right-offset: 84px;   /* horizontal gap from bubble to callout */
+      --arrow-bottom-offset: 122px; /* vertical gap from bubble to callout */
+    }
+    .demo-pointer{
+      position: fixed;
+      right: calc(var(--bubble-right) + var(--arrow-right-offset));
+      bottom: calc(var(--bubble-bottom) + var(--arrow-bottom-offset));
+      z-index: 2147483000;
+      pointer-events: none;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: #7fb2ff;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+    .pointer-wrap{
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .pointer-text{
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(100,116,139,0.35);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      line-height: 1.3;
+      color: #d8e9ff;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+    }
+    .pointer-arrow{
+      width: 150px;
+      height: 150px;
+      display: block;
+      animation: gentle 2s ease-in-out infinite;
+    }
+    @keyframes gentle { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+    @media (prefers-reduced-motion: reduce){ .pointer-arrow{ animation: none } }
+    @media (max-width: 640px){
+      :root{ --arrow-right-offset: 66px; --arrow-bottom-offset: 100px; }
+      .pointer-arrow{ width: 128px; height: 128px; }
+      .pointer-text{ font-size: 13px; }
+    }
+  </style>
+</section>
+
 
     <!-- HOW IT WORKS -->
     <section class="section">
       <div class="container">
         <h2 class="center">How It Works</h2>
         <div class="grid-3">
-          <article class="tile"><h3>1) Train on Your Content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
-          <article class="tile"><h3>2) Drop in the Snippet</h3><p>One line added to your site. No rebuild needed.</p></article>
-          <article class="tile"><h3>3) Go Live and Track Leads</h3><p>See conversations, booked calls, and qualified enquiries in one place.</p></article>
-        </div>
+  <article class="tile"><h3>1) Train on Your Content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
+  <article class="tile"><h3>2) Drop in the Snippet</h3><p>Add our snippet to your site and the chat bubble appears in the bottom right.</p></article>
+  <article class="tile"><h3>3) We handle everything</h3><p>Setup, branding, integrations, and updates are all done for you so you do not lift a finger.</p></article>
+</div>
       </div>
     </section>
 
