@@ -15,7 +15,7 @@
 
   <!-- Keep the webchat inside our card (not fullscreen) -->
   <style>
-    /* The container we mount into */
+    /* Mount target the widget will live in */
     #webchat {
       position: relative;
       width: 100%;
@@ -58,7 +58,7 @@
       </div>
     </section>
 
-    <!-- DEMO (official JS embed pinned inside a card) -->
+    <!-- DEMO (official JS embed with automatic universal fallback) -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">See your assistant in action</h2>
@@ -69,8 +69,19 @@
                style="position:relative;width:100%;max-width:900px;height:560px;
                       background:#0b0d13;border-radius:16px;overflow:hidden;
                       box-shadow:0 18px 50px rgba(0,0,0,.35);">
-            <!-- Mount target (required BEFORE init) -->
+            <!-- 1) Mount target (required BEFORE init) -->
             <div id="webchat"></div>
+
+            <!-- 2) Hidden iframe fallback (shown only if JS embed fails) -->
+            <div id="iframe-fallback" style="display:none; position:absolute; inset:0;">
+              <iframe
+                src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/10/00/20250810004526-MT792BNT.json"
+                title="FlowBotAI Demo"
+                style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
+                allow="clipboard-read; clipboard-write; microphone; camera; autoplay; fullscreen"
+                loading="eager"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -116,30 +127,61 @@
     </div>
   </footer>
 
-  <!-- Init Botpress (per docs) -->
+  <!-- Init Botpress with auto-fallback -->
   <script>
-    window.botpress.on('webchat:ready', () => {
-      window.botpress.open(); // open immediately
-    });
+    (function () {
+      const fallbackBox = document.getElementById('iframe-fallback');
 
-    window.botpress.init({
-      botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-      clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-      selector: "#webchat",
-      configuration: {
-        version: "v1",
-        botName: "FlowBot",
-        botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
-        color: "#3276EA",
-        variant: "solid",
-        headerVariant: "solid",
-        themeMode: "dark",
-        fontFamily: "inter",
-        radius: 4,
-        feedbackEnabled: false,
-        footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+      function showFallback() {
+        if (fallbackBox) fallbackBox.style.display = 'block';
       }
-    });
+      function hideFallback() {
+        if (fallbackBox) fallbackBox.style.display = 'none';
+      }
+
+      // If JS embed becomes ready, open it and hide fallback iframe
+      window.botpress.on('webchat:ready', () => {
+        hideFallback();
+        if (window.botpress.open) window.botpress.open();
+      });
+
+      // Try official JS embed first (per docs)
+      try {
+        window.botpress.init({
+          botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+          clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+          selector: "#webchat",
+          configuration: {
+            version: "v1",
+            botName: "FlowBot",
+            botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads — all while matching your brand’s tone and style. Powered by AI and trained on your own content, it integrates in minutes and works tirelessly to capture more enquiries without adding to your workload.",
+            color: "#3276EA",
+            variant: "solid",
+            headerVariant: "solid",
+            themeMode: "dark",
+            fontFamily: "inter",
+            radius: 4,
+            feedbackEnabled: false,
+            footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+          }
+        });
+      } catch (e) {
+        // If init throws immediately, use fallback
+        showFallback();
+      }
+
+      // Safety: if widget didn't appear (adblock/cookies/third-party) → fallback
+      setTimeout(() => {
+        const widget = document.querySelector('#webchat .bpWebchat');
+        if (!widget) showFallback();
+      }, 3500);
+
+      // If any load error bubbles up mentioning botpress, fallback
+      window.addEventListener('error', (e) => {
+        const msg = String(e && e.message || '');
+        if (msg.toLowerCase().includes('botpress')) showFallback();
+      }, true);
+    })();
   </script>
 
   <!-- Minor site JS + custom overrides -->
