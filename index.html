@@ -10,19 +10,7 @@
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
 
-  <!-- Optional CSP if you serve one via meta (headers are better) -->
-  <!--
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' https://cdn.botpress.cloud https://files.bpcontent.cloud 'unsafe-inline';
-    style-src  'self' 'unsafe-inline' https://cdn.botpress.cloud;
-    img-src    'self' data: https://cdn.botpress.cloud https://*.botpress.cloud;
-    font-src   'self' https://cdn.botpress.cloud;
-    connect-src 'self' https://*.botpress.cloud wss://*.botpress.cloud;
-    frame-src  https://cdn.botpress.cloud https://files.bpcontent.cloud;">
-  -->
-
-  <!-- Keep the webchat inside our card -->
+  <!-- Styles -->
   <style>
     #webchat { position: relative; width: 100%; height: 100%; }
     #webchat .bpWebchat {
@@ -33,9 +21,10 @@
       max-height: 100% !important;
       border-radius: 16px !important;
     }
-    #webchat .bpFab { display: none !important; }
+    /* Hide floating bubble everywhere */
+    .bpFab { display: none !important; }
 
-    /* Make "Or email ..." bigger + white */
+    /* Contact email style */
     .contact-email-small { font-size: 20px; color: #fff; margin-top: 20px; }
     .contact-email-small a { color: #fff; font-weight: 600; text-decoration: underline; }
 
@@ -80,72 +69,41 @@
                       background:#0b0d13;border-radius:16px;overflow:hidden;
                       box-shadow:0 18px 50px rgba(0,0,0,.35);">
             <!-- Mount target -->
-            <div id="webchat"></div>
+            <div id="webchat" style="position:relative;width:100%;height:100%;"></div>
 
-            <!-- Fallback iframe (shown if JS embed is blocked or fails) -->
-            <div id="iframe-fallback" style="display:none; position:absolute; inset:0;">
-              <iframe
-                src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/08/10/00/20250810004526-MT792BNT.json"
-                title="FlowBotAI Demo"
-                style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:16px;background:#0b0d13"
-                allow="clipboard-read; clipboard-write; microphone; camera; autoplay; fullscreen"
-                loading="eager"
-              ></iframe>
-            </div>
-
-            <!-- Botpress embed scripts live next to the mount target -->
+            <!-- Botpress embed -->
             <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
             <script>
               (function () {
                 const root = document.getElementById('webchat');
-                const fb   = document.getElementById('iframe-fallback');
 
-                function showFallback() { if (fb) fb.style.display = 'block'; }
-                function hideFallback() { if (fb) fb.style.display = 'none'; }
+                // Destroy any floating/global instance first
+                try { window.botpress.destroy && window.botpress.destroy(); } catch (_) {}
 
-                // Initialize webchat into our div
-                try {
-                  window.botpress.init({
-                    botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-                    clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-                    rootElement: root,   // key for cross-browser reliability
-                    configuration: {
-                      version: "v1",
-                      botName: "FlowBot",
-                      botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads.",
-                      color: "#3276EA",
-                      variant: "solid",
-                      headerVariant: "solid",
-                      themeMode: "dark",
-                      fontFamily: "inter",
-                      radius: 4,
-                      feedbackEnabled: false,
-                      footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
-                    }
-                  });
-                } catch (e) {
-                  // If init throws immediately (CSP, blockers), use fallback
-                  showFallback();
-                  return;
-                }
-
-                // Hide fallback when webchat is ready, then open it
-                window.botpress.on('webchat:ready', () => {
-                  hideFallback();
-                  if (window.botpress.open) window.botpress.open();
+                // Initialize strictly into our DIV
+                window.botpress.init({
+                  botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
+                  clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
+                  rootElement: root,
+                  configuration: {
+                    version: "v1",
+                    botName: "FlowBot",
+                    botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads.",
+                    color: "#3276EA",
+                    variant: "solid",
+                    headerVariant: "solid",
+                    themeMode: "dark",
+                    fontFamily: "inter",
+                    radius: 4,
+                    feedbackEnabled: false,
+                    footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
+                  }
                 });
 
-                // Safety timer: if nothing mounted after 3s, show fallback
-                setTimeout(() => {
-                  const mounted = document.querySelector('#webchat .bpWebchat');
-                  if (!mounted) showFallback();
-                }, 3000);
-
-                // If any load error mentions botpress, show fallback
-                window.addEventListener('error', (e) => {
-                  const msg = String((e && e.message) || '').toLowerCase();
-                  if (msg.includes('botpress')) showFallback();
-                }, true);
+                // Open once ready
+                window.botpress.on('webchat:ready', () => {
+                  window.botpress.open && window.botpress.open();
+                });
               })();
             </script>
           </div>
