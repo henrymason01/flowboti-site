@@ -100,7 +100,8 @@
         <form id="contact-form" class="contact-form" method="POST" novalidate>
           <label class="field"><span class="label">Full name</span><input type="text" name="full_name" required/><span class="error"></span></label>
           <label class="field"><span class="label">Business website</span><input type="url" name="website" required/><span class="error"></span></label>
-          <label class="field"><span class="label">Work email</span><input type="email" name="_replyto" required/><span class="error"></span></label>
+          <label class="field"><span class="label">Work email</span><input type="email" name="email" required/><span class="error"></span></label>
+<input type="hidden" name="_subject" value="New FlowBotAI enquiry"/>
           <label class="field"><span class="label">What should the assistant do?</span><textarea name="requirements" rows="6" required></textarea><span class="error"></span></label>
           <div class="cta-row form-ctas">
             <button type="submit" class="btn btn-full btn-lg btn-primary">Send</button>
