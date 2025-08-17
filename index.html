@@ -64,7 +64,7 @@
           <h1>Your Website’s 24/7 Sales Teammate</h1>
           <p class="sub">Capture more enquiries while you sleep. A branded AI assistant that answers questions, books calls, and qualifies leads.</p>
           <div class="cta-row">
-            <a href="#contact" class="btn btn-lg btn-primary">See it in Action</a>
+            <a href="#" id="see-demo" class="btn btn-lg btn-primary">See it in Action</a>
             <a href="#contact" class="btn btn-lg btn-secondary">Contact Us</a>
           </div>
         </div>
@@ -101,7 +101,6 @@
         <h2 class="center">Contact Us</h2>
         <p class="center muted">Tell us about your business. We’ll reply within one working day.</p>
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate>
-          <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
           <label class="field"><span class="label">Full name</span><input type="text" name="full_name" required/><span class="error"></span></label>
           <label class="field"><span class="label">Business website</span><input type="url" name="website" placeholder="https://example.com" required/><span class="error"></span></label>
           <label class="field"><span class="label">Work email</span><input type="email" name="_replyto" required/><span class="error"></span></label>
@@ -125,8 +124,18 @@
 
   <script>
     // footer year
-    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    const y = document.getElementById('year'); 
+    if (y) y.textContent = new Date().getFullYear();
+
+    // make "See it in Action" button open chatbot
+    document.getElementById('see-demo').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.botpress) {
+        window.botpress.open();
+      }
+    });
   </script>
+
   <style>
     /* Make "Or email ..." bigger + white */
     .contact-email-small {
