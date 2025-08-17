@@ -187,6 +187,60 @@
       }
     });
   }
+        /* --- Hide the pointer when the chat bubble is used (robust) --- */
+    (function () {
+      const hidePointer = () => {
+        if (demoPointer) demoPointer.style.display = 'none';
+      };
+
+      // A) If Botpress events are available, use them
+      const hookEvents = () => {
+        if (!window.botpress || !window.botpress.on) return false;
+        try {
+          window.botpress.on('webchat:opened', hidePointer);
+          window.botpress.on('webchat:ready', () => {
+            // If the chat is already open by config, hide immediately
+            const panel = document.querySelector('.bpWebchat');
+            if (panel && panel.getBoundingClientRect().width > 0) hidePointer();
+          });
+          return true;
+        } catch { return false; }
+      };
+      hookEvents();
+
+      // B) Attach a click listener to the launcher/bubble when it appears
+      const attachToBubble = () => {
+        const candidates = document.querySelectorAll(
+          '.bpFab, .bp-floating-launcher, .bp-launcher, [data-testid="bp-fab"]'
+        );
+        candidates.forEach(el => {
+          if (!el.dataset.pointerHooked) {
+            el.dataset.pointerHooked = '1';
+            el.addEventListener('click', hidePointer, { capture: true });
+          }
+        });
+      };
+      attachToBubble();
+
+      // C) Watch the DOM so if Botpress injects later, we still hook it
+      const mo = new MutationObserver(() => {
+        attachToBubble();
+        hookEvents();
+        // Also hide if the chat panel becomes visible
+        const panel = document.querySelector('.bpWebchat');
+        if (panel && panel.getBoundingClientRect().width > 0) hidePointer();
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+
+      // D) Last-resort polling: if the chat opens, hide the pointer
+      const iv = setInterval(() => {
+        const panel = document.querySelector('.bpWebchat');
+        if (panel && panel.offsetParent !== null) {
+          hidePointer();
+          clearInterval(iv);
+        }
+      }, 800);
+    })();
 </script>
 </body>
 </html>
