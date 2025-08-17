@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>FlowBotAI — AI Assistants that Convert Visitors</title>
+  <title>FlowBotAI | AI Assistants that Convert Visitors</title>
   <meta name="description" content="FlowBotAI is your fully branded, 24/7 virtual assistant that answers customer questions, books calls, and qualifies leads."/>
   <link rel="icon" href="/logo.png" type="image/png"/>
   <link rel="apple-touch-icon" href="/logo.png"/>
@@ -46,85 +46,69 @@
       </div>
     </section>
 
-    <!-- DEMO (pointer arrow version) -->
+    <!-- DEMO (new arrow design) -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">See your assistant in action</h2>
-        <p class="center muted">This is how it appears on your site — click the chat bubble in the bottom-right.</p>
+        <p class="center muted">This is how it appears on your site. Click the chat bubble in the bottom right.</p>
       </div>
 
       <!-- Pointer arrow UI -->
       <div class="demo-pointer" aria-hidden="true">
         <div class="pointer-badge">
           <span class="pointer-text">
-            This is what it looks like on your website — try me
+            This is what it looks like on your website. Try me
           </span>
-          <svg class="pointer-arrow" viewBox="0 0 120 120" width="80" height="80">
-            <path d="M20,20 C80,10 90,70 95,100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-            <path d="M95,100 l-18,-6 l10,14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="pulse"></span>
+          <div class="curved-arrow"></div>
         </div>
       </div>
 
       <style>
         .demo-pointer {
           position: fixed;
-          right: 20px;
-          bottom: 120px; /* sits above chat bubble */
+          right: 30px;
+          bottom: 140px;
           z-index: 2147483000;
           pointer-events: none;
           font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
         }
         .pointer-badge {
-          display: inline-flex;
+          display: flex;
+          flex-direction: column;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
           color: #bcd7ff;
-          text-shadow: 0 1px 2px rgba(0,0,0,.35);
+          text-align: center;
         }
         .pointer-text {
-          background: rgba(15, 23, 42, 0.85);
+          background: rgba(15, 23, 42, 0.9);
           border: 1px solid rgba(100, 116, 139, 0.35);
-          border-radius: 999px;
+          border-radius: 12px;
           padding: 10px 14px;
           font-size: 14px;
-          line-height: 1.2;
-          white-space: nowrap;
+          line-height: 1.3;
           backdrop-filter: blur(4px);
+          max-width: 200px;
         }
-        .pointer-arrow {
-          color: #7fb2ff;
-          transform: rotate(-10deg);
-          animation: floaty 2.2s ease-in-out infinite;
+        .curved-arrow {
+          width: 50px;
+          height: 50px;
+          border: solid #7fb2ff;
+          border-width: 0 6px 6px 0;
+          display: inline-block;
+          transform: rotate(45deg);
+          animation: bounce 1.5s infinite;
         }
-        .pulse {
-          position: absolute;
-          right: -4px;
-          bottom: -8px;
-          width: 10px;
-          height: 10px;
-          border-radius: 999px;
-          background: #7fb2ff;
-          box-shadow: 0 0 0 0 rgba(127,178,255,0.7);
-          animation: pulse 1.8s ease-out infinite;
-        }
-        @keyframes pulse {
-          0%   { box-shadow: 0 0 0 0 rgba(127,178,255,0.7); }
-          70%  { box-shadow: 0 0 0 18px rgba(127,178,255,0); }
-          100% { box-shadow: 0 0 0 0 rgba(127,178,255,0); }
-        }
-        @keyframes floaty {
-          0%,100% { transform: rotate(-10deg) translateY(0); }
-          50%     { transform: rotate(-10deg) translateY(-4px); }
+        @keyframes bounce {
+          0%, 100% { transform: rotate(45deg) translateY(0); }
+          50%      { transform: rotate(45deg) translateY(-8px); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .pointer-arrow, .pulse { animation: none; }
+          .curved-arrow { animation: none; }
         }
         @media (max-width: 640px) {
-          .demo-pointer { right: 14px; bottom: 100px; }
+          .demo-pointer { right: 20px; bottom: 120px; }
           .pointer-text { font-size: 13px; }
-          .pointer-arrow { width: 64px; height: 64px; }
         }
       </style>
     </section>
@@ -134,9 +118,9 @@
       <div class="container">
         <h2 class="center">How It Works</h2>
         <div class="grid-3">
-          <article class="tile"><h3>1) Drop in the Snippet</h3><p>One line added to your site. No rebuild needed.</p></article>
-          <article class="tile"><h3>2) Train on Your Content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
-          <article class="tile"><h3>3) Go Live & Track Leads</h3><p>See conversations, booked calls, and qualified enquiries in one place.</p></article>
+          <article class="tile"><h3>1) Train on Your Content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
+          <article class="tile"><h3>2) Drop in the Snippet</h3><p>One line added to your site. No rebuild needed.</p></article>
+          <article class="tile"><h3>3) Go Live and Track Leads</h3><p>See conversations, booked calls, and qualified enquiries in one place.</p></article>
         </div>
       </div>
     </section>
@@ -145,7 +129,7 @@
     <section id="contact" class="section">
       <div class="container">
         <h2 class="center">Contact Us</h2>
-        <p class="center muted">Tell us about your business. We’ll reply within one working day.</p>
+        <p class="center muted">Tell us about your business. We will reply within one working day.</p>
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mjkojepy" method="POST" novalidate>
           <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave empty" />
           <label class="field"><span class="label">Full name</span><input type="text" name="full_name" required/><span class="error"></span></label>
