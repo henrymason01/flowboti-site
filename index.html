@@ -10,38 +10,18 @@
   <link rel="stylesheet" href="/styles.css"/>
   <meta name="theme-color" content="#0b0d13"/>
 
-  <!-- Load ONCE, early -->
-  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+  <!-- Botpress embed scripts -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+  <script src="https://files.bpcontent.cloud/2025/08/10/00/20250810004525-2546JD45.js" defer></script>
 
   <style>
-    /* Keep chat INSIDE the card */
-    #webchat { position: relative; width: 100%; height: 100%; }
-    #webchat .bpWebchat {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      max-height: 100% !important;
-      border-radius: 16px !important;
-    }
-
-    /* Nuke any floating bubble/panel if it tries to appear */
-    .bpFab { display: none !important; }
-
-    /* Extra belt + braces for some builds that spawn a separate floating container */
-    .bp-floating-launcher, .bp-floating-widget, #bp-webchat, .bp-widget-container {
-      display: none !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-
-    /* Misc styles you had */
     .contact-email-small { font-size: 20px; color: #fff; margin-top: 20px; }
     .contact-email-small a { color: #fff; font-weight: 600; text-decoration: underline; }
     html { scroll-behavior: smooth; }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header class="nav">
     <div class="container nav-inner-center">
       <a class="brand-center" href="#main">
@@ -66,75 +46,87 @@
       </div>
     </section>
 
-    <!-- DEMO (single embedded instance only) -->
+    <!-- DEMO (pointer arrow version) -->
     <section id="demo" class="section alt">
       <div class="container">
         <h2 class="center">See your assistant in action</h2>
-        <p class="center muted">Trained on your FAQs and brand voice. Ready to handle routine conversations with care.</p>
+        <p class="center muted">This is how it appears on your site — click the chat bubble in the bottom-right.</p>
+      </div>
 
-        <div style="display:flex;justify-content:center;align-items:center;min-height:560px;">
-          <div id="webchat-card"
-               style="position:relative;width:100%;max-width:900px;height:560px;
-                      background:#0b0d13;border-radius:16px;overflow:hidden;
-                      box-shadow:0 18px 50px rgba(0,0,0,.35);">
-            <div id="webchat" style="position:relative;width:100%;height:100%;"></div>
-
-            <script>
-              (function () {
-                const root = document.getElementById('webchat');
-
-                // 1) Try to destroy any pre-existing floating instance
-                try { window.botpress.destroy && window.botpress.destroy(); } catch (_) {}
-
-                // 2) Initialize STRICTLY into our div (rootElement is the key line)
-                window.botpress.init({
-                  botId: "0d7b480b-f1d5-4d28-943b-2e59f2d62c45",
-                  clientId: "4ddde79d-08f5-4846-be15-1303066f19a7",
-                  rootElement: root,
-                  // Fallback selector in case some versions ignore rootElement:
-                  selector: "#webchat",
-                  configuration: {
-                    version: "v1",
-                    themeMode: "dark",
-                    color: "#3276EA",
-                    variant: "solid",
-                    headerVariant: "solid",
-                    fontFamily: "inter",
-                    radius: 4,
-                    feedbackEnabled: false,
-                    botName: "FlowBot",
-                    botDescription: "FlowBotAI is a fully branded, 24/7 virtual assistant that lives on your website. It answers customer questions instantly, books calls, and qualifies leads.",
-                    footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)"
-                  }
-                });
-
-                // 3) Open when ready
-                window.botpress.on('webchat:ready', () => {
-                  window.botpress.open && window.botpress.open();
-                });
-
-                // 4) Last-resort: if a floating container appears, remove it
-                const killFloaters = () => {
-                  const suspects = [
-                    document.getElementById('bp-webchat'),
-                    ...document.querySelectorAll('.bp-floating-launcher, .bp-floating-widget, .bp-widget-container')
-                  ];
-                  suspects.forEach(el => {
-                    if (el && !root.contains(el)) {
-                      try { el.remove(); } catch(_) {}
-                    }
-                  });
-                };
-                // Run now and a few times after init to catch late spawns
-                killFloaters();
-                setTimeout(killFloaters, 500);
-                setTimeout(killFloaters, 1500);
-                setTimeout(killFloaters, 3000);
-              })();
-            </script>
-          </div>
+      <!-- Pointer arrow UI -->
+      <div class="demo-pointer" aria-hidden="true">
+        <div class="pointer-badge">
+          <span class="pointer-text">
+            This is what it looks like on your website — try me
+          </span>
+          <svg class="pointer-arrow" viewBox="0 0 120 120" width="80" height="80">
+            <path d="M20,20 C80,10 90,70 95,100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+            <path d="M95,100 l-18,-6 l10,14" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="pulse"></span>
         </div>
       </div>
+
+      <style>
+        .demo-pointer {
+          position: fixed;
+          right: 20px;
+          bottom: 120px; /* sits above chat bubble */
+          z-index: 2147483000;
+          pointer-events: none;
+          font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+        }
+        .pointer-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          color: #bcd7ff;
+          text-shadow: 0 1px 2px rgba(0,0,0,.35);
+        }
+        .pointer-text {
+          background: rgba(15, 23, 42, 0.85);
+          border: 1px solid rgba(100, 116, 139, 0.35);
+          border-radius: 999px;
+          padding: 10px 14px;
+          font-size: 14px;
+          line-height: 1.2;
+          white-space: nowrap;
+          backdrop-filter: blur(4px);
+        }
+        .pointer-arrow {
+          color: #7fb2ff;
+          transform: rotate(-10deg);
+          animation: floaty 2.2s ease-in-out infinite;
+        }
+        .pulse {
+          position: absolute;
+          right: -4px;
+          bottom: -8px;
+          width: 10px;
+          height: 10px;
+          border-radius: 999px;
+          background: #7fb2ff;
+          box-shadow: 0 0 0 0 rgba(127,178,255,0.7);
+          animation: pulse 1.8s ease-out infinite;
+        }
+        @keyframes pulse {
+          0%   { box-shadow: 0 0 0 0 rgba(127,178,255,0.7); }
+          70%  { box-shadow: 0 0 0 18px rgba(127,178,255,0); }
+          100% { box-shadow: 0 0 0 0 rgba(127,178,255,0); }
+        }
+        @keyframes floaty {
+          0%,100% { transform: rotate(-10deg) translateY(0); }
+          50%     { transform: rotate(-10deg) translateY(-4px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .pointer-arrow, .pulse { animation: none; }
+        }
+        @media (max-width: 640px) {
+          .demo-pointer { right: 14px; bottom: 100px; }
+          .pointer-text { font-size: 13px; }
+          .pointer-arrow { width: 64px; height: 64px; }
+        }
+      </style>
     </section>
 
     <!-- HOW IT WORKS -->
@@ -170,6 +162,7 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-inner">
       <span>© <span id="year"></span> FlowBotAI</span>
