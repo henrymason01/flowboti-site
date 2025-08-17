@@ -115,26 +115,23 @@
   <!-- Callout + Arrow -->
   <div class="demo-pointer" aria-hidden="true">
     <div class="pointer-wrap">
-      <span class="pointer-text">This is what it looks like on your website. Try me</span>
+      <span class="pointer-text">This is what it looks like on your website. Try me!</span>
 
-      <!-- Clear curved arrow with a solid triangular head.
-           The tip is the bottom-right corner of the SVG. -->
-      <svg class="pointer-arrow" viewBox="0 0 180 180" role="presentation" aria-hidden="true">
-        <!-- curve -->
-        <path d="M20,40 C20,130 110,120 140,150" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
-        <!-- triangular arrowhead pointing to the tip -->
-        <polygon points="140,150 120,140 128,160" fill="currentColor"/>
+      <!-- Curved arrow styled like your example -->
+      <svg class="pointer-arrow" viewBox="0 0 200 200" role="presentation" aria-hidden="true">
+        <path d="M10,40 C40,140 120,100 180,160" 
+              fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+        <polygon points="180,160 160,150 168,174" fill="currentColor"/>
       </svg>
     </div>
   </div>
 
   <style>
     :root{
-      /* Nudge these four to aim the arrow perfectly at your bubble */
       --bubble-right: 28px;
       --bubble-bottom: 28px;
-      --arrow-right-offset: 84px;   /* horizontal gap from bubble to callout */
-      --arrow-bottom-offset: 122px; /* vertical gap from bubble to callout */
+      --arrow-right-offset: 84px;
+      --arrow-bottom-offset: 122px;
     }
     .demo-pointer{
       position: fixed;
@@ -142,15 +139,15 @@
       bottom: calc(var(--bubble-bottom) + var(--arrow-bottom-offset));
       z-index: 2147483000;
       pointer-events: none;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color: #7fb2ff;
-      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      font-family: system-ui, Inter, Arial, sans-serif;
+      color: #3276EA;
+      text-shadow: 0 2px 4px rgba(0,0,0,.4);
     }
     .pointer-wrap{
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .pointer-text{
       background: rgba(15, 23, 42, 0.92);
@@ -164,21 +161,15 @@
       white-space: nowrap;
     }
     .pointer-arrow{
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       display: block;
       animation: gentle 2s ease-in-out infinite;
     }
     @keyframes gentle { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
     @media (prefers-reduced-motion: reduce){ .pointer-arrow{ animation: none } }
-    @media (max-width: 640px){
-      :root{ --arrow-right-offset: 66px; --arrow-bottom-offset: 100px; }
-      .pointer-arrow{ width: 128px; height: 128px; }
-      .pointer-text{ font-size: 13px; }
-    }
   </style>
 </section>
-
 
     <!-- HOW IT WORKS -->
     <section class="section">
@@ -187,7 +178,7 @@
         <div class="grid-3">
   <article class="tile"><h3>1) Train on Your Content</h3><p>We learn from your site, docs, and past chats to match your tone.</p></article>
   <article class="tile"><h3>2) Drop in the Snippet</h3><p>Add our snippet to your site and the chat bubble appears in the bottom right.</p></article>
-  <article class="tile"><h3>3) We handle everything</h3><p>Setup, branding, integrations, and updates are all done for you so you do not lift a finger.</p></article>
+  <article class="tile"><h3>3) Ready to Go</h3><p>Your assistant runs instantly once installed, no complex setup required.</p></article>
 </div>
       </div>
     </section>
