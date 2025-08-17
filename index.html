@@ -122,19 +122,31 @@
     </div>
   </footer>
 
-  <script>
+    <script>
     // footer year
     const y = document.getElementById('year'); 
     if (y) y.textContent = new Date().getFullYear();
+
+    // get demo pointer
+    const demoPointer = document.querySelector('.demo-pointer');
 
     // make "See it in Action" button open chatbot
     document.getElementById('see-demo').addEventListener('click', function(e) {
       e.preventDefault();
       if (window.botpress) {
         window.botpress.open();
+        if (demoPointer) demoPointer.style.display = 'none'; // hide arrow & bubble
       }
     });
+
+    // also listen for botpress open event
+    if (window.botpress) {
+      window.botpress.on('webchat:opened', () => {
+        if (demoPointer) demoPointer.style.display = 'none';
+      });
+    }
   </script>
+
 
   <style>
     /* Make "Or email ..." bigger + white */
